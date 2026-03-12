@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NaijaRent — Find Your Space, Own Your Peace</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --green:#1a7a4a;--green-light:#25a663;--green-pale:#e6f7ef;
+  --gold:#e8a020;--gold-light:#fdf3e0;--dark:#0f1a14;--dark2:#1c2d22;
+  --mid:#3d5a46;--muted:#7a9484;--light:#f4f9f6;--white:#ffffff;
+  --red:#d94040;--border:#d0e4d8;--blue:#2563eb;
+  --shadow:0 4px 24px rgba(15,26,20,.10);--shadow-lg:0 12px 48px rgba(15,26,20,.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--light);color:var(--dark);min-height:100vh;font-size:15px;line-height:1.6}
+h1,h2,h3,h4{font-family:'Syne',sans-serif}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--light)}::-webkit-scrollbar-thumb{background:var(--green-light);border-radius:3px}
+.page{display:none;min-height:100vh}.page.active{display:block}
+#page-register.active,#page-login.active,#page-agent-register.active{display:flex}
+
+/* ── LANDING ── */
+#page-landing{background:var(--dark);color:var(--white);position:relative;overflow:hidden}
+.land-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 80% 20%,rgba(26,122,74,.35) 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 10% 80%,rgba(232,160,32,.15) 0%,transparent 60%),linear-gradient(160deg,#0f1a14 0%,#1c2d22 50%,#0f1a14 100%);z-index:0}
+.land-grid{position:absolute;inset:0;z-index:0;opacity:.06;background-image:linear-gradient(var(--green-light) 1px,transparent 1px),linear-gradient(90deg,var(--green-light) 1px,transparent 1px);background-size:50px 50px}
+.land-content{position:relative;z-index:1}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid rgba(255,255,255,.08);flex-wrap:wrap;gap:10px}
+.nav-logo{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--white);display:flex;align-items:center;gap:10px}
+.nav-logo span{color:var(--gold)}
+.logo-icon{width:36px;height:36px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.nav-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.nav-link{color:rgba(255,255,255,.7);font-size:14px;cursor:pointer;padding:6px 12px;border-radius:6px;transition:all .2s}
+.nav-link:hover{color:var(--white);background:rgba(255,255,255,.08)}
+.btn{padding:10px 22px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;border:none;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,.3);color:var(--white)}
+.btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,.08)}
+.btn-outline-dark{background:transparent;border:1.5px solid var(--border);color:var(--mid)}
+.btn-outline-dark:hover{border-color:var(--green);color:var(--green)}
+.btn-primary{background:var(--green);color:var(--white)}
+.btn-primary:hover{background:var(--green-light);transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,122,74,.4)}
+.btn-gold{background:var(--gold);color:var(--dark);font-weight:600}
+.btn-gold:hover{background:#f0b030;transform:translateY(-1px)}
+.btn-lg{padding:14px 32px;font-size:16px;border-radius:10px}
+.btn-sm{padding:7px 16px;font-size:13px;border-radius:6px}
+.btn-danger{background:var(--red);color:#fff}
+.btn-danger:hover{background:#c03030}
+.btn-ghost{background:var(--green-pale);color:var(--green)}
+.btn-ghost:hover{background:#d0f0e0}
+.btn-purple{background:#7b2fbe;color:#fff}
+.btn-purple:hover{background:#6a27a6}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{background:#1d4ed8}
+.btn-affiliate{background:linear-gradient(135deg,#e8a020,#f59e0b);color:var(--dark);font-weight:700;box-shadow:0 4px 14px rgba(232,160,32,.3)}
+.btn-affiliate:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(232,160,32,.4)}
+
+.hero{padding:100px 48px 80px;max-width:720px}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(26,122,74,.25);border:1px solid rgba(37,166,99,.4);color:#7de0a8;border-radius:20px;padding:6px 16px;font-size:13px;margin-bottom:28px}
+.hero-tag::before{content:'●';color:var(--green-light);font-size:8px}
+.hero h1{font-size:clamp(42px,6vw,70px);font-weight:800;line-height:1.05;margin-bottom:24px;letter-spacing:-1.5px}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero p{font-size:18px;color:rgba(255,255,255,.65);max-width:520px;margin-bottom:40px;line-height:1.7}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.roles-section{padding:0 48px 80px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1100px}
+.role-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.role-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,122,74,.15) 0%,transparent 60%);opacity:0;transition:opacity .3s}
+.role-card:hover{border-color:var(--green-light);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.3)}
+.role-card:hover::before{opacity:1}
+.role-card.affiliate{border-color:rgba(232,160,32,.3);background:rgba(232,160,32,.05)}
+.role-card.affiliate:hover{border-color:var(--gold)}
+.role-icon{font-size:36px;margin-bottom:16px}
+.role-card h3{font-size:20px;font-weight:700;margin-bottom:8px}
+.role-card p{color:rgba(255,255,255,.55);font-size:14px;line-height:1.6;margin-bottom:20px}
+.role-card .arrow{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:13px;font-weight:600}
+.stats-bar{border-top:1px solid rgba(255,255,255,.08);padding:32px 48px;display:flex;gap:48px;flex-wrap:wrap}
+.stat-num{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--gold)}
+.stat-label{font-size:13px;color:rgba(255,255,255,.5);margin-top:2px}
+
+/* ── AUTH ── */
+#page-register,#page-login,#page-agent-register{background:var(--light);display:none;min-height:100vh;align-items:center;justify-content:center;padding:40px 20px}
+.auth-card{background:var(--white);border-radius:20px;box-shadow:var(--shadow-lg);padding:48px;width:100%;max-width:560px}
+.auth-logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--dark);margin-bottom:8px}
+.auth-logo span{color:var(--green)}
+.auth-card h2{font-size:26px;font-weight:700;margin-bottom:6px}
+.auth-card .sub{color:var(--muted);font-size:14px;margin-bottom:32px}
+.role-selector{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
+.role-opt{border:2px solid var(--border);border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;transition:all .2s}
+.role-opt.selected{border-color:var(--green);background:var(--green-pale)}
+.role-opt .r-icon{font-size:22px;margin-bottom:6px}
+.role-opt .r-name{font-size:12px;font-weight:600;color:var(--dark)}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:var(--mid);margin-bottom:6px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 14px;border-radius:8px;border:1.5px solid var(--border);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--dark);background:var(--white);transition:border .2s;outline:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--green)}
+.form-group textarea{resize:vertical;min-height:90px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-check{display:flex;align-items:center;gap:10px}
+.form-check input[type=checkbox]{width:17px;height:17px;cursor:pointer;accent-color:var(--green)}
+.form-check label{font-size:14px;cursor:pointer}
+.auth-switch{text-align:center;margin-top:20px;font-size:14px;color:var(--muted)}
+.auth-switch a{color:var(--green);font-weight:600;cursor:pointer;text-decoration:none}
+.divider{border:none;border-top:1px solid var(--border);margin:24px 0}
+.profile-upload-area{border:2px dashed var(--border);border-radius:12px;padding:24px;text-align:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.profile-upload-area:hover{border-color:var(--green);background:var(--green-pale)}
+.profile-upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.profile-preview{width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid var(--green)}
+.tag-section{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;padding:10px 0 14px;border-top:1px solid var(--border);margin-top:8px}
+
+/* ── DASHBOARD ── */
+#page-dashboard{display:none}
+#page-dashboard.active{display:flex;min-height:100vh}
+.sidebar{width:240px;min-width:240px;background:var(--dark);color:var(--white);padding:24px 0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sb-logo{padding:0 24px 24px;border-bottom:1px solid rgba(255,255,255,.08);font-family:'Syne',sans-serif;font-size:20px;font-weight:800}
+.sb-logo span{color:var(--gold)}
+.sb-user{padding:20px 24px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-avatar{width:48px;height:48px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:8px;overflow:hidden}
+.sb-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.sb-name{font-size:14px;font-weight:600}
+.sb-username{font-size:12px;color:rgba(255,255,255,.4);margin-top:2px}
+.sb-role{font-size:11px;color:var(--gold);background:rgba(232,160,32,.15);border-radius:4px;padding:2px 8px;display:inline-block;margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.sb-nav{flex:1;padding:16px 12px}
+.sb-item{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:8px;font-size:14px;color:rgba(255,255,255,.65);cursor:pointer;transition:all .15s;margin-bottom:2px}
+.sb-item:hover{background:rgba(255,255,255,.08);color:var(--white)}
+.sb-item.active{background:var(--green);color:var(--white)}
+.sb-item .icon{font-size:16px;width:20px;text-align:center}
+.sb-footer{padding:16px 12px;border-top:1px solid rgba(255,255,255,.08)}
+.main-content{flex:1;overflow-y:auto;background:var(--light)}
+.main-header{background:var(--white);padding:20px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;flex-wrap:wrap;gap:10px}
+.main-header h2{font-size:22px;font-weight:700}
+.main-body{padding:28px 32px}
+
+/* ── CARDS ── */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.house-card{background:var(--white);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);transition:all .2s;border:1px solid var(--border)}
+.house-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.house-img{height:180px;background:linear-gradient(135deg,var(--green) 0%,var(--green-light) 100%);display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden}
+.house-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.house-img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(0,0,0,.3))}
+.house-img .badge{position:absolute;top:10px;left:10px;background:var(--gold);color:var(--dark);font-size:11px;font-weight:700;border-radius:5px;padding:3px 8px;z-index:1}
+.badge-occupied{background:#d94040!important;color:#fff!important}
+.badge-vacant{background:#25a663!important;color:#fff!important}
+.verified-badge{position:absolute;top:10px;right:10px;background:var(--green);color:#fff;font-size:11px;border-radius:5px;padding:3px 8px;z-index:1}
+.house-body{padding:16px}
+.house-type-tag{display:inline-block;background:var(--green-pale);color:var(--green);font-size:11px;font-weight:600;border-radius:4px;padding:3px 8px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.house-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:4px;color:var(--dark)}
+.house-area{font-size:13px;color:var(--muted);margin-bottom:12px}
+.house-price{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--green);margin-bottom:12px}
+.house-price span{font-size:12px;font-weight:400;color:var(--muted)}
+.house-amenities{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.amenity{font-size:12px;color:var(--mid);background:var(--light);border-radius:4px;padding:3px 8px}
+.house-footer{display:flex;gap:8px;flex-wrap:wrap}
+
+/* STARS */
+.stars{color:#e8a020;font-size:14px;letter-spacing:1px}
+.star-input{display:flex;gap:4px;margin-bottom:8px}
+.star-input span{font-size:24px;cursor:pointer;color:#ccc;transition:color .1s}
+.star-input span.active{color:#e8a020}
+
+/* STAT CARDS */
+.stat-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:28px}
+.stat-card{background:var(--white);border-radius:12px;padding:20px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.stat-card .sc-icon{font-size:28px;margin-bottom:10px}
+.stat-card .sc-num{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--dark)}
+.stat-card .sc-label{font-size:13px;color:var(--muted);margin-top:2px}
+.stat-card.green{border-left:4px solid var(--green)}
+.stat-card.gold{border-left:4px solid var(--gold)}
+.stat-card.red{border-left:4px solid var(--red)}
+.stat-card.purple{border-left:4px solid #7b2fbe}
+.stat-card.blue{border-left:4px solid var(--blue)}
+
+/* SECTION HEADER */
+.sec-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.sec-header h3{font-size:18px;font-weight:700}
+
+/* RECOMMENDATION */
+.score-bar{height:8px;background:var(--border);border-radius:4px;overflow:hidden;margin:8px 0}
+.score-fill{height:100%;border-radius:4px;background:var(--green)}
+.score-fill.stretch{background:var(--gold)}
+.score-fill.aspirational{background:#9b59b6}
+.tier-badge{display:inline-block;border-radius:6px;font-size:12px;font-weight:700;padding:3px 10px;margin-bottom:10px}
+.tier-badge.affordable{background:var(--green-pale);color:var(--green)}
+.tier-badge.stretch{background:var(--gold-light);color:#a06010}
+.tier-badge.aspirational{background:#f5eeff;color:#6a2b9e}
+
+/* ADVISOR */
+.advisor-box{background:linear-gradient(135deg,var(--green) 0%,#157a40 100%);color:#fff;border-radius:16px;padding:28px;margin-bottom:24px;position:relative;overflow:hidden}
+.advisor-box::after{content:'₦';position:absolute;right:24px;top:50%;transform:translateY(-50%);font-family:'Syne',sans-serif;font-size:100px;font-weight:900;opacity:.08;color:#fff}
+.advisor-box h3{font-size:20px;margin-bottom:8px}
+.advisor-box p{opacity:.85;font-size:14px;margin-bottom:20px}
+.budget-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.budget-item{background:rgba(255,255,255,.15);border-radius:10px;padding:14px}
+.budget-item .bi-label{font-size:11px;opacity:.8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.budget-item .bi-val{font-family:'Syne',sans-serif;font-size:18px;font-weight:700}
+
+/* SEARCH BAR */
+.search-bar{display:flex;gap:10px;flex-wrap:wrap;background:var(--white);padding:20px;border-radius:14px;border:1px solid var(--border);margin-bottom:24px}
+.search-bar input,.search-bar select{flex:1;min-width:150px;padding:10px 14px;border-radius:8px;border:1.5px solid var(--border);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border .2s;color:var(--dark);background:var(--white)}
+.search-bar input:focus,.search-bar select:focus{border-color:var(--green)}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:20px;padding:36px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg)}
+.modal h3{font-size:22px;font-weight:700;margin-bottom:20px}
+.modal-footer{display:flex;gap:10px;margin-top:24px;justify-content:flex-end;flex-wrap:wrap}
+.close-btn{position:absolute;top:16px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted)}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--dark);color:#fff;padding:14px 22px;border-radius:10px;font-size:14px;box-shadow:var(--shadow-lg);z-index:9999;transform:translateY(80px);opacity:0;transition:all .3s;display:flex;align-items:center;gap:10px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{border-left:4px solid var(--green-light)}
+.toast.error{border-left:4px solid var(--red)}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-state .es-icon{font-size:56px;margin-bottom:16px;opacity:.4}
+.empty-state h4{font-size:18px;color:var(--mid);margin-bottom:8px}
+.empty-state p{font-size:14px}
+
+/* ALERT */
+.alert{border-radius:10px;padding:14px 18px;font-size:14px;margin-bottom:18px}
+.alert-info{background:#e8f4fd;color:#1a5a8a;border-left:4px solid #3498db}
+.alert-warn{background:var(--gold-light);color:#7a4a00;border-left:4px solid var(--gold)}
+.alert-success{background:var(--green-pale);color:#145a30;border-left:4px solid var(--green)}
+.alert-red{background:#fdeaea;color:#7a1a1a;border-left:4px solid var(--red)}
+.alert-gold{background:linear-gradient(135deg,rgba(232,160,32,.12),rgba(245,158,11,.08));border:1px solid rgba(232,160,32,.3);color:#7a4a00;border-radius:12px;padding:16px 20px;margin-bottom:18px}
+
+/* TABLE */
+.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse}
+th{background:var(--light);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);padding:12px 14px;text-align:left}
+td{padding:12px 14px;border-bottom:1px solid var(--border);font-size:14px}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--light)}
+
+/* CHIP */
+.chip{display:inline-block;background:var(--green-pale);color:var(--green);border-radius:4px;font-size:11px;font-weight:700;padding:2px 8px;text-transform:capitalize}
+.chip-gold{background:var(--gold-light);color:#8a5a00}
+.chip-red{background:#fdeaea;color:#8a2020}
+.chip-blue{background:#eff6ff;color:#1d4ed8}
+.chip-purple{background:#f5eeff;color:#6a2b9e}
+
+/* WHATSAPP */
+.wa-btn{display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;border:none;border-radius:6px;padding:7px 14px;font-size:13px;cursor:pointer;text-decoration:none;font-family:'DM Sans',sans-serif;font-weight:500}
+.wa-btn:hover{background:#1da851}
+
+/* PAYMENT */
+.pay-box{background:linear-gradient(135deg,#0f3460 0%,#16213e 100%);color:#fff;border-radius:16px;padding:24px;margin-bottom:20px}
+.pay-box h4{font-size:18px;margin-bottom:6px}
+.pay-box p{font-size:13px;opacity:.75;margin-bottom:16px}
+.pay-row{display:flex;justify-content:space-between;font-size:14px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.pay-row:last-child{border-bottom:none;font-weight:700;font-size:16px;padding-top:12px}
+.pay-highlight{color:#4fc3f7}
+.commission-badge{background:rgba(232,160,32,.2);border:1px solid rgba(232,160,32,.4);border-radius:8px;padding:10px 14px;font-size:13px;color:#ffd166;margin-bottom:16px}
+
+/* CHAT */
+.chat-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.chat-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--white);border-radius:10px;border:1px solid var(--border);cursor:pointer;transition:all .15s}
+.chat-item:hover{border-color:var(--green);background:var(--green-pale)}
+.chat-item.unread{border-left:3px solid var(--green)}
+.messages-box{min-height:200px;max-height:280px;overflow-y:auto;border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:14px;display:flex;flex-direction:column;gap:10px;background:var(--light)}
+.msg{max-width:75%;padding:10px 14px;border-radius:12px;font-size:14px}
+.msg.sent{align-self:flex-end;background:var(--green);color:#fff;border-bottom-right-radius:4px}
+.msg.recv{align-self:flex-start;background:var(--white);border:1px solid var(--border);border-bottom-left-radius:4px}
+.msg-time{font-size:11px;opacity:.65;margin-top:4px}
+.msg-input-row{display:flex;gap:8px}
+.msg-input-row input{flex:1;padding:10px 14px;border-radius:8px;border:1.5px solid var(--border);font-family:'DM Sans',sans-serif;font-size:14px;outline:none}
+.msg-input-row input:focus{border-color:var(--green)}
+.chat-time{font-size:11px;color:var(--muted);margin-left:auto;white-space:nowrap}
+
+/* APPLICATIONS */
+.app-card{background:var(--white);border-radius:12px;padding:20px;border:1px solid var(--border);margin-bottom:14px;box-shadow:var(--shadow)}
+.app-status{display:inline-block;border-radius:5px;font-size:12px;font-weight:700;padding:3px 10px;text-transform:capitalize}
+.app-status.pending{background:var(--gold-light);color:#8a5a00}
+.app-status.approved{background:var(--green-pale);color:var(--green)}
+.app-status.rejected{background:#fdeaea;color:var(--red)}
+.app-status.completed{background:#e8f4fd;color:#1a5a8a}
+
+/* ADMIN TABS */
+.admin-tab-bar{display:flex;gap:4px;background:var(--light);border-radius:10px;padding:4px;margin-bottom:20px;width:fit-content}
+.admin-tab{padding:8px 18px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .15s}
+.admin-tab.active{background:var(--white);color:var(--dark);box-shadow:var(--shadow)}
+
+/* MAP */
+.map-placeholder{background:var(--white);border-radius:14px;border:1px solid var(--border);overflow:hidden;margin-bottom:24px}
+.map-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.map-frame{height:360px;background:linear-gradient(135deg,#e8f5e9 0%,#c8e6c9 100%);position:relative;overflow:hidden}
+.map-grid{position:absolute;inset:0;opacity:.3;background-image:linear-gradient(rgba(0,100,50,.2) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,50,.2) 1px,transparent 1px);background-size:40px 40px}
+.map-pin{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:2}
+.pin-icon{background:var(--green);color:#fff;border-radius:50% 50% 50% 0;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:14px;transform:rotate(-45deg);box-shadow:0 2px 8px rgba(0,0,0,.2);transition:transform .2s}
+.map-pin:hover .pin-icon{transform:rotate(-45deg) scale(1.2)}
+.pin-label,.pin-price{font-size:11px;font-weight:700;text-align:center;color:var(--dark);white-space:nowrap}
+.pin-price{color:var(--green)}
+
+/* AFFILIATE HERO */
+.affiliate-hero{background:linear-gradient(135deg,#0f1a14 0%,#1c2d22 60%,#2d4a1e 100%);color:#fff;border-radius:20px;padding:40px;margin-bottom:28px;position:relative;overflow:hidden}
+.affiliate-hero::before{content:'₦';position:absolute;right:-20px;top:-20px;font-family:'Syne',sans-serif;font-size:200px;font-weight:900;opacity:.04;color:var(--gold)}
+.affiliate-hero h2{font-size:28px;font-weight:800;margin-bottom:12px}
+.affiliate-hero h2 span{color:var(--gold)}
+.affiliate-hero p{opacity:.8;font-size:15px;margin-bottom:24px;max-width:560px;line-height:1.7}
+.earn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px}
+.earn-item{background:rgba(255,255,255,.1);border-radius:12px;padding:16px;text-align:center}
+.earn-item .earn-pct{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--gold)}
+.earn-item .earn-lbl{font-size:12px;opacity:.75;margin-top:4px}
+.how-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:28px}
+.how-step{background:var(--white);border-radius:14px;padding:22px;border:1px solid var(--border);text-align:center;position:relative}
+.how-step .step-num{width:36px;height:36px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;margin:0 auto 12px}
+.how-step h4{font-size:14px;font-weight:700;margin-bottom:6px}
+.how-step p{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* MEDIA GALLERY */
+.media-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-bottom:14px}
+.media-thumb{border-radius:8px;overflow:hidden;aspect-ratio:1;background:var(--light);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;border:1px solid var(--border)}
+.media-thumb img,.media-thumb video{width:100%;height:100%;object-fit:cover}
+.media-thumb .media-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;color:#fff;font-size:20px}
+.media-thumb:hover .media-overlay{display:flex}
+.media-upload-area{border:2px dashed var(--border);border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;position:relative}
+.media-upload-area:hover{border-color:var(--green);background:var(--green-pale)}
+.media-upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer}
+
+/* CONTACT PAGE */
+#page-contact{background:var(--light)}
+.contact-hero{background:var(--dark);color:#fff;padding:80px 48px;position:relative;overflow:hidden}
+.contact-hero::after{content:'📞';position:absolute;right:48px;bottom:-20px;font-size:120px;opacity:.06}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:48px;max-width:1100px;margin:0 auto}
+.contact-card{background:var(--white);border-radius:16px;padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.contact-info-item{display:flex;align-items:flex-start;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)}
+.contact-info-item:last-child{border-bottom:none}
+.contact-icon{width:44px;height:44px;border-radius:10px;background:var(--green-pale);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.contact-info-item h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.contact-info-item p{font-size:13px;color:var(--muted);line-height:1.5}
+.faq-item{border-bottom:1px solid var(--border);padding:16px 0;cursor:pointer}
+.faq-item:last-child{border-bottom:none}
+.faq-q{font-weight:600;font-size:14px;display:flex;justify-content:space-between;align-items:center}
+.faq-a{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.6;display:none}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .faq-q span{transform:rotate(180deg)}
+.faq-q span{transition:transform .2s;font-size:16px}
+
+/* STATUS BADGE */
+.status-occupied{background:#fdeaea;color:var(--red);border-radius:5px;font-size:11px;font-weight:700;padding:3px 8px;display:inline-block}
+.status-vacant{background:var(--green-pale);color:var(--green);border-radius:5px;font-size:11px;font-weight:700;padding:3px 8px;display:inline-block}
+
+/* PROFILE PIC */
+.profile-pic-large{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid var(--green);background:var(--green);display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;overflow:hidden;flex-shrink:0}
+
+/* AGENT VERIFICATION BADGE */
+.agent-verified{background:linear-gradient(135deg,var(--gold),#f59e0b);color:var(--dark);border-radius:6px;padding:2px 10px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:4px}
+.agent-unverified{background:#fdeaea;color:var(--red);border-radius:6px;padding:2px 10px;font-size:11px;font-weight:700}
+
+@media(max-width:768px){
+  .nav{padding:16px 20px}
+  .hero{padding:60px 20px 40px}
+  .roles-section{padding:0 20px 40px;grid-template-columns:1fr}
+  .stats-bar{padding:20px;gap:24px}
+  .sidebar{display:none}
+  .contact-grid{grid-template-columns:1fr;padding:20px}
+  .form-row{grid-template-columns:1fr}
+  .main-body{padding:16px}
+  .auth-card{padding:28px 20px}
+}
+
+/* ── RENTREC ── */
+.rentrec-msg{max-width:80%;padding:11px 15px;border-radius:14px;font-size:14px;line-height:1.55}
+.rentrec-msg.user{align-self:flex-end;background:linear-gradient(135deg,var(--green),var(--green-light));color:#fff;border-bottom-right-radius:4px}
+.rentrec-msg.bot{align-self:flex-start;background:var(--white);border:1px solid var(--border);border-bottom-left-radius:4px;color:var(--dark)}
+.rentrec-msg.bot .msg-sender{font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px}
+.rentrec-typing{align-self:flex-start;background:var(--white);border:1px solid var(--border);border-radius:14px;border-bottom-left-radius:4px;padding:12px 16px;display:flex;gap:5px;align-items:center}
+.rentrec-typing span{width:7px;height:7px;background:var(--muted);border-radius:50%;animation:bounce .8s infinite}
+.rentrec-typing span:nth-child(2){animation-delay:.15s}
+.rentrec-typing span:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+
+/* ── COMPLAINTS ── */
+.complaint-card{background:var(--white);border-radius:12px;padding:18px;border:1px solid var(--border);margin-bottom:14px;box-shadow:var(--shadow)}
+.cmp-status-open{background:#fdeaea;color:var(--red);border-radius:5px;font-size:11px;font-weight:700;padding:3px 8px;display:inline-block}
+.cmp-status-resolved{background:var(--green-pale);color:var(--green);border-radius:5px;font-size:11px;font-weight:700;padding:3px 8px;display:inline-block}
+.cmp-status-reviewing{background:var(--gold-light);color:#8a5a00;border-radius:5px;font-size:11px;font-weight:700;padding:3px 8px;display:inline-block}
+</style>
+</head>
+<body>
+
+<!-- ══ LANDING ══ -->
+<div class="page active" id="page-landing">
+  <div class="land-bg"></div>
+  <div class="land-grid"></div>
+  <div class="land-content">
+    <nav class="nav">
+      <div class="nav-logo"><div class="logo-icon">🏡</div>Naija<span>Rent</span></div>
+      <div class="nav-actions">
+        <span class="nav-link" onclick="showPage('page-contact')">Contact Us</span>
+        <span class="nav-link" onclick="showPage('page-agent-register')">🤝 Become an Agent</span>
+        <button class="btn btn-outline" onclick="showPage('page-login')">Sign In</button>
+        <button class="btn btn-primary" onclick="showPage('page-register')">Get Started</button>
+      </div>
+    </nav>
+    <div class="hero">
+      <div class="hero-tag">🇳🇬 Nigeria's #1 Verified Rental Platform</div>
+      <h1>Find Your Space,<br/>Own Your <em>Peace</em></h1>
+      <p>Transparent, verified, and stress-free house rentals across Nigeria. No agent wahala. No hidden fees. Just the right home for you.</p>
+      <div class="hero-ctas">
+        <button class="btn btn-gold btn-lg" onclick="showPage('page-register')">Find a House →</button>
+        <button class="btn btn-outline btn-lg" onclick="showPage('page-login')">Sign In</button>
+      </div>
+    </div>
+    <div class="roles-section">
+      <div class="role-card" onclick="selectRoleAndRegister('tenant')">
+        <div class="role-icon">🏠</div>
+        <h3>I'm a Tenant</h3>
+        <p>Find verified houses near you with AI-powered recommendations based on your budget and preferences.</p>
+        <span class="arrow">Get Started →</span>
+      </div>
+      <div class="role-card" onclick="selectRoleAndRegister('landlord')">
+        <div class="role-icon">🏡</div>
+        <h3>I'm a Landlord</h3>
+        <p>List your property, receive applications, and collect rent payments safely through NaijaRent.</p>
+        <span class="arrow">List Property →</span>
+      </div>
+      <div class="role-card" onclick="selectRoleAndRegister('agent')">
+        <div class="role-icon">🤝</div>
+        <h3>I'm an Agent</h3>
+        <p>Manage multiple properties for landlords and earn your commission on every verified transaction.</p>
+        <span class="arrow">Join as Agent →</span>
+      </div>
+      <div class="role-card affiliate" onclick="showPage('page-agent-register')">
+        <div class="role-icon">💰</div>
+        <h3>Become a NaijaRent Agent</h3>
+        <p>Earn real income by finding vacant houses, listing them on NaijaRent, and earning 10% on every rent paid. 15% total agent fee — you keep 10%!</p>
+        <span class="arrow" style="color:var(--gold)">Start Earning →</span>
+      </div>
+    </div>
+    <div class="stats-bar">
+      <div><div class="stat-num" id="stat-listings">0</div><div class="stat-label">Verified Listings</div></div>
+      <div><div class="stat-num" id="stat-tenants">0</div><div class="stat-label">Active Tenants</div></div>
+      <div><div class="stat-num" id="stat-txn">₦0</div><div class="stat-label">Rent Processed</div></div>
+      <div><div class="stat-num">6+</div><div class="stat-label">Cities Covered</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ REGISTER ══ -->
+<div class="page" id="page-register">
+  <div class="auth-card">
+    <div class="auth-logo">Naija<span>Rent</span></div>
+    <h2>Create Account</h2>
+    <p class="sub">Join thousands of Nigerians finding great homes</p>
+    <div class="role-selector">
+      <div class="role-opt selected" id="role-tenant" onclick="selectRole('tenant')"><div class="r-icon">🏠</div><div class="r-name">Tenant</div></div>
+      <div class="role-opt" id="role-landlord" onclick="selectRole('landlord')"><div class="r-icon">🏡</div><div class="r-name">Landlord</div></div>
+      <div class="role-opt" id="role-agent" onclick="selectRole('agent')"><div class="r-icon">🤝</div><div class="r-name">Agent</div></div>
+    </div>
+    <!-- Profile Picture -->
+    <div class="form-group">
+      <label>Profile Picture</label>
+      <div class="profile-upload-area" onclick="triggerPicUpload('reg-pic-input')" id="reg-pic-area">
+        <input type="file" id="reg-pic-input" accept="image/*" onchange="previewProfilePic(this,'reg-pic-area')"/>
+        <div id="reg-pic-preview" style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <span style="font-size:32px">📷</span>
+          <span style="font-size:13px;color:var(--muted)">Click to upload profile picture</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>First Name *</label><input id="reg-fname" type="text" placeholder="Chioma"/></div>
+      <div class="form-group"><label>Last Name *</label><input id="reg-lname" type="text" placeholder="Okafor"/></div>
+    </div>
+    <div class="form-group"><label>Username * (used for sign in)</label><input id="reg-username" type="text" placeholder="e.g. chioma_naija" style="text-transform:lowercase"/></div>
+    <div class="form-row">
+      <div class="form-group"><label>Phone Number *</label><input id="reg-phone" type="tel" placeholder="08012345678"/></div>
+      <div class="form-group"><label>Email Address</label><input id="reg-email" type="email" placeholder="you@email.com"/></div>
+    </div>
+    <div class="form-group"><label>Password *</label><input id="reg-password" type="password" placeholder="Min. 6 characters"/></div>
+    <div id="tenant-extra">
+      <div class="tag-section">Your Housing Profile</div>
+      <div class="form-group"><label>NIN (National ID Number) *</label><input id="reg-nin" type="text" maxlength="11" placeholder="12345678901"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Employment Status</label>
+          <select id="reg-employment"><option value="">Select</option><option value="employed">Employed</option><option value="self_employed">Self-Employed</option><option value="student">Student</option><option value="unemployed">Unemployed</option></select>
+        </div>
+        <div class="form-group"><label>Job Role / Occupation</label><input id="reg-jobrole" type="text" placeholder="e.g. Nurse, Teacher"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Monthly Income Range</label>
+          <select id="reg-salary"><option value="">Select</option><option value="below_50k">Below ₦50k/mo</option><option value="50k_100k">₦50k–100k/mo</option><option value="100k_200k">₦100k–200k/mo</option><option value="200k_500k">₦200k–500k/mo</option><option value="above_500k">Above ₦500k/mo</option></select>
+        </div>
+        <div class="form-group"><label>Preferred City / Area</label><input id="reg-area" type="text" placeholder="e.g. Akure"/></div>
+      </div>
+      <div class="form-group"><label>Preferred House Type</label>
+        <select id="reg-housetype"><option value="">Select</option><option value="room_and_parlour">Room & Parlour</option><option value="self_contained">Self-Contained</option><option value="2_bedroom_flat">2-Bedroom Flat</option><option value="3_bedroom_flat">3-Bedroom Flat</option><option value="bungalow">Bungalow</option><option value="duplex">Duplex</option></select>
+      </div>
+      <div class="tag-section">Next of Kin Details</div>
+      <div class="form-row">
+        <div class="form-group"><label>Next of Kin Name *</label><input id="reg-kin-name" type="text" placeholder="Full name"/></div>
+        <div class="form-group"><label>Relationship</label>
+          <select id="reg-kin-rel"><option value="">Select</option><option>Parent</option><option>Spouse</option><option>Sibling</option><option>Child</option><option>Friend</option><option>Colleague</option></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Next of Kin Phone *</label><input id="reg-kin-phone" type="tel" placeholder="08012345678"/></div>
+        <div class="form-group"><label>Next of Kin Address</label><input id="reg-kin-addr" type="text" placeholder="Home address"/></div>
+      </div>
+    </div>
+    <div id="bank-extra" style="display:none">
+      <div class="tag-section">Bank Account for Payouts</div>
+      <div class="form-group"><label>Bank Name *</label>
+        <select id="reg-bank"><option value="">Select Bank</option><option>GTBank</option><option>Zenith Bank</option><option>Access Bank</option><option>First Bank</option><option>UBA</option><option>FCMB</option><option>Sterling Bank</option><option>Opay</option><option>Kuda</option><option>Palmpay</option></select>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Account Number *</label><input id="reg-accnum" type="text" maxlength="10" placeholder="10-digit number"/></div>
+        <div class="form-group"><label>Account Name *</label><input id="reg-accname" type="text" placeholder="As on BVN"/></div>
+      </div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;padding:13px" onclick="register()">Create Account →</button>
+    <div class="auth-switch">Already have an account? <a onclick="showPage('page-login')">Sign in here</a></div>
+    <div class="auth-switch" style="margin-top:8px"><a onclick="showPage('page-landing')">← Back to Home</a></div>
+  </div>
+</div>
+
+<!-- ══ LOGIN ══ -->
+<div class="page" id="page-login">
+  <div class="auth-card" style="max-width:440px">
+    <div class="auth-logo">Naija<span>Rent</span></div>
+    <h2>Welcome Back</h2>
+    <p class="sub">Sign in with your username or phone number</p>
+    <div class="form-group"><label>Username or Phone Number</label><input id="login-id" type="text" placeholder="username or 08012345678"/></div>
+    <div class="form-group"><label>Password</label><input id="login-password" type="password" placeholder="Your password"/></div>
+    <button class="btn btn-primary" style="width:100%;padding:13px" onclick="login()">Sign In →</button>
+    <div class="auth-switch">Don't have an account? <a onclick="showPage('page-register')">Register here</a></div>
+    <div class="auth-switch" style="margin-top:8px"><a onclick="showPage('page-landing')">← Back to Home</a></div>
+    <hr class="divider"/>
+    <div class="alert alert-info" style="margin-bottom:0;font-size:13px">
+      <strong>Demo Accounts (sign in with username or phone):</strong><br/>
+      Tenant: <strong>chioma_naija</strong> / demo123<br/>
+      Tenant 2: <strong>adewale_ibadan</strong> / demo123<br/>
+      Tenant 3: <strong>fatima_abuja</strong> / demo123<br/>
+      Landlord: <strong>emeka_landlord</strong> / demo123<br/>
+      Landlord 2: <strong>mrs_bello</strong> / demo123<br/>
+      Agent: <strong>tunde_agent</strong> / demo123<br/>
+      NaijaRent Agent: <strong>amaka_affiliate</strong> / demo123<br/>
+      Admin: <strong>admin_nr</strong> / admin123
+    </div>
+  </div>
+</div>
+
+<!-- ══ AFFILIATE / AGENT REGISTRATION ══ -->
+<div class="page" id="page-agent-register">
+  <div class="auth-card" style="max-width:640px">
+    <div class="auth-logo">Naija<span>Rent</span> <span style="color:var(--gold);font-size:14px;font-weight:600">Affiliate Program</span></div>
+    <h2>🤝 Become a NaijaRent Agent</h2>
+    <p class="sub">Find vacant houses, list them, earn 10% on every rent paid. NaijaRent earns 5%. Maximum 15% total agent fee — automatic.</p>
+    <div class="alert-gold">
+      <strong>💰 How You Earn:</strong> You register vacant houses on NaijaRent. When a tenant pays rent, <strong>15% agent fee</strong> is automatically applied. You receive <strong>10%</strong>, NaijaRent keeps <strong>5%</strong>. The more you list, the more you earn!
+    </div>
+    <div class="earn-grid" style="margin-bottom:24px">
+      <div style="background:var(--green-pale);border-radius:12px;padding:16px;text-align:center;border:1px solid var(--border)">
+        <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--green)">10%</div>
+        <div style="font-size:12px;color:var(--muted)">Your earnings per rent</div>
+      </div>
+      <div style="background:var(--gold-light);border-radius:12px;padding:16px;text-align:center;border:1px solid var(--border)">
+        <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--gold)">5%</div>
+        <div style="font-size:12px;color:var(--muted)">NaijaRent platform fee</div>
+      </div>
+      <div style="background:#eff6ff;border-radius:12px;padding:16px;text-align:center;border:1px solid var(--border)">
+        <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--blue)">15%</div>
+        <div style="font-size:12px;color:var(--muted)">Max total agent fee</div>
+      </div>
+    </div>
+    <!-- Profile Photo -->
+    <div class="form-group">
+      <label>Profile Photo *</label>
+      <div class="profile-upload-area" id="aff-pic-area" onclick="triggerPicUpload('aff-pic-input')">
+        <input type="file" id="aff-pic-input" accept="image/*" onchange="previewProfilePic(this,'aff-pic-area')"/>
+        <div id="aff-pic-preview"><span style="font-size:28px">📸</span><br/><span style="font-size:13px;color:var(--muted)">Upload your clear photo</span></div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>First Name *</label><input id="aff-fname" type="text" placeholder="Amaka"/></div>
+      <div class="form-group"><label>Last Name *</label><input id="aff-lname" type="text" placeholder="Eze"/></div>
+    </div>
+    <div class="form-group"><label>Username * (unique, for sign in)</label><input id="aff-username" type="text" placeholder="amaka_affiliate" style="text-transform:lowercase"/></div>
+    <div class="form-row">
+      <div class="form-group"><label>Phone Number *</label><input id="aff-phone" type="tel" placeholder="08012345678"/></div>
+      <div class="form-group"><label>Email Address *</label><input id="aff-email" type="email" placeholder="you@email.com"/></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Date of Birth * (must be 18+)</label><input id="aff-dob" type="date"/></div>
+      <div class="form-group"><label>Gender</label>
+        <select id="aff-gender"><option value="">Select</option><option>Male</option><option>Female</option></select>
+      </div>
+    </div>
+    <div class="form-group"><label>NIN (National ID Number) *</label><input id="aff-nin" type="text" maxlength="11" placeholder="11-digit NIN"/></div>
+    <div class="form-row">
+      <div class="form-group"><label>State of Origin *</label>
+        <select id="aff-state"><option value="">Select State</option><option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option><option>Anambra</option><option>Bauchi</option><option>Bayelsa</option><option>Benue</option><option>Borno</option><option>Cross River</option><option>Delta</option><option>Ebonyi</option><option>Edo</option><option>Ekiti</option><option>Enugu</option><option>FCT</option><option>Gombe</option><option>Imo</option><option>Jigawa</option><option>Kaduna</option><option>Kano</option><option>Katsina</option><option>Kebbi</option><option>Kogi</option><option>Kwara</option><option>Lagos</option><option>Nasarawa</option><option>Niger</option><option>Ogun</option><option>Ondo</option><option>Osun</option><option>Oyo</option><option>Plateau</option><option>Rivers</option><option>Sokoto</option><option>Taraba</option><option>Yobe</option><option>Zamfara</option></select>
+      </div>
+      <div class="form-group"><label>LGA *</label><input id="aff-lga" type="text" placeholder="e.g. Akure South"/></div>
+    </div>
+    <div class="form-group"><label>Workplace / Business Address</label><input id="aff-workplace" type="text" placeholder="Where do you work from?"/></div>
+    <div class="tag-section">Bank Account for Your Earnings</div>
+    <div class="form-group"><label>Bank Name *</label>
+      <select id="aff-bank"><option value="">Select Bank</option><option>GTBank</option><option>Zenith Bank</option><option>Access Bank</option><option>First Bank</option><option>UBA</option><option>FCMB</option><option>Sterling Bank</option><option>Opay</option><option>Kuda</option><option>Palmpay</option></select>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Account Number *</label><input id="aff-accnum" type="text" maxlength="10" placeholder="10-digit"/></div>
+      <div class="form-group"><label>Account Name *</label><input id="aff-accname" type="text" placeholder="As on BVN"/></div>
+    </div>
+    <div class="form-group"><label>Password *</label><input id="aff-password" type="password" placeholder="Min. 6 characters"/></div>
+    <div class="form-check" style="margin-bottom:20px">
+      <input type="checkbox" id="aff-agree"/>
+      <label for="aff-agree" style="font-size:13px">I agree to NaijaRent's affiliate terms. I confirm all information provided is accurate and my NIN is valid.</label>
+    </div>
+    <button class="btn btn-affiliate" style="width:100%;padding:13px;font-size:16px" onclick="registerAffiliate()">Apply as NaijaRent Agent 🚀</button>
+    <div class="auth-switch" style="margin-top:16px"><a onclick="showPage('page-landing')">← Back to Home</a></div>
+  </div>
+</div>
+
+<!-- ══ DASHBOARD ══ -->
+<div class="page" id="page-dashboard">
+  <nav class="sidebar">
+    <div class="sb-logo">Naija<span>Rent</span></div>
+    <div class="sb-user">
+      <div class="sb-avatar" id="sb-avatar">👤</div>
+      <div class="sb-name" id="sb-name">Loading...</div>
+      <div class="sb-username" id="sb-username">@username</div>
+      <div class="sb-role" id="sb-role">Tenant</div>
+    </div>
+    <div class="sb-nav" id="sb-nav"></div>
+    <div class="sb-footer">
+      <div class="sb-item" onclick="logout()"><span class="icon">🚪</span>Sign Out</div>
+    </div>
+  </nav>
+  <div class="main-content">
+    <div class="main-header">
+      <h2 id="panel-title">Dashboard</h2>
+      <div id="header-actions"></div>
+    </div>
+    <div class="main-body" id="main-body"></div>
+  </div>
+</div>
+
+<!-- ══ CONTACT PAGE ══ -->
+<div class="page" id="page-contact">
+  <div class="contact-hero">
+    <div class="land-grid" style="opacity:.04"></div>
+    <nav class="nav" style="padding:0 0 24px;border-bottom-color:rgba(255,255,255,.08)">
+      <div class="nav-logo"><div class="logo-icon">🏡</div>Naija<span>Rent</span></div>
+      <div class="nav-actions">
+        <button class="btn btn-outline btn-sm" onclick="showPage('page-landing')">← Home</button>
+        <button class="btn btn-primary btn-sm" onclick="showPage('page-login')">Sign In</button>
+      </div>
+    </nav>
+    <h1 style="font-size:40px;font-weight:800;margin-bottom:12px">Contact Us</h1>
+    <p style="color:rgba(255,255,255,.65);font-size:16px;max-width:500px">We're here to help. Reach out to the NaijaRent team for support, partnerships, or any enquiries.</p>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <div class="contact-card" style="margin-bottom:24px">
+        <h3 style="margin-bottom:20px">Get in Touch</h3>
+        <div class="contact-info-item">
+          <div class="contact-icon">📞</div>
+          <div><h4>Phone / WhatsApp</h4><p>+234 803 000 0000<br/>+234 814 000 0000<br/>Mon–Sat: 8am – 8pm</p></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">📧</div>
+          <div><h4>Email</h4><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f5868085859a8781b59b949c9f9487909b81db9b92">[email&#160;protected]</a><br/><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f59492909b8186b59b949c9f9487909b81db9b92">[email&#160;protected]</a><br/><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89f9e8fbfde7ecfbfae1e0f9fac9e7e8e0e3e8fbece7fda7e7ee">[email&#160;protected]</a></p></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">📍</div>
+          <div><h4>Office Address</h4><p>12 Alagbaka GRA, Akure,<br/>Ondo State, Nigeria</p></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">🏦</div>
+          <div><h4>Platform Account</h4><p><strong>Olanrewaju Joseph Sunday</strong><br/>GTBank · 0235949599</p></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <h3 style="margin-bottom:8px">Follow Us</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Stay updated on new listings and platform news</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-ghost btn-sm">📘 Facebook</a>
+          <a class="btn btn-ghost btn-sm">📸 Instagram</a>
+          <a class="btn btn-ghost btn-sm">🐦 Twitter/X</a>
+          <a class="wa-btn btn-sm">💬 WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="contact-card" style="margin-bottom:24px">
+        <h3 style="margin-bottom:20px">Send Us a Message</h3>
+        <div class="form-group"><label>Your Name</label><input type="text" id="ct-name" placeholder="Full name"/></div>
+        <div class="form-group"><label>Phone / Email</label><input type="text" id="ct-contact" placeholder="Your phone or email"/></div>
+        <div class="form-group"><label>Subject</label>
+          <select id="ct-subject"><option value="">Select topic</option><option>General Enquiry</option><option>Listing Issue</option><option>Payment Problem</option><option>Agent Registration</option><option>Report a Scam</option><option>Partnership</option></select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea id="ct-msg" placeholder="How can we help you?"></textarea></div>
+        <button class="btn btn-primary" style="width:100%" onclick="submitContact()">Send Message →</button>
+      </div>
+      <div class="contact-card">
+        <h3 style="margin-bottom:16px">Frequently Asked Questions</h3>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">How does rent payment work? <span>▼</span></div>
+          <div class="faq-a">Tenants pay through NaijaRent's secure platform. We collect the full amount (rent + agent fees + platform fee), then disburse to landlords within 24 hours. You receive a payment reference for every transaction.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">How do I verify my listing? <span>▼</span></div>
+          <div class="faq-a">Submit your listing and our admin team will review within 48 hours. Verified listings appear in tenant searches. We may request additional documents for expensive properties.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">What are the agent fees? <span>▼</span></div>
+          <div class="faq-a">Regular agents set 10–20% fees. NaijaRent affiliate agents earn 10% automatically with 5% going to NaijaRent as platform fee, making a total 15% agent fee for those listings.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Is my NIN information safe? <span>▼</span></div>
+          <div class="faq-a">Absolutely. NIN data is encrypted and stored securely. It is only used for identity verification and is never shared with third parties without your consent.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">How do I become a NaijaRent affiliate agent? <span>▼</span></div>
+          <div class="faq-a">Register on the Affiliate page with your NIN, valid ID, bank account, and personal details. Once approved, you can start listing vacant houses and earning 10% on every rent payment.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODALS ══ -->
+<!-- Add Listing Modal -->
+<div class="modal-overlay" id="modal-listing">
+  <div class="modal" style="position:relative;max-width:640px">
+    <button class="close-btn" onclick="closeModal('modal-listing')">✕</button>
+    <h3>📋 Add Property Listing</h3>
+    <div class="form-group"><label>Full Address *</label><input id="l-address" type="text" placeholder="e.g. 12 Arakale Road, Akure"/></div>
+    <div class="form-row">
+      <div class="form-group"><label>City *</label>
+        <select id="l-city"><option value="">Select city</option><option>Abuja</option><option>Akure</option><option>Benin City</option><option>Enugu</option><option>Ibadan</option><option>Kano</option><option>Lagos</option><option>Osogbo</option><option>Port Harcourt</option><option>Warri</option></select>
+      </div>
+      <div class="form-group"><label>House Type *</label>
+        <select id="l-type"><option value="">Select type</option><option value="room_and_parlour">Room & Parlour</option><option value="self_contained">Self-Contained</option><option value="2_bedroom_flat">2-Bedroom Flat</option><option value="3_bedroom_flat">3-Bedroom Flat</option><option value="bungalow">Bungalow</option><option value="duplex">Duplex</option></select>
+      </div>
+    </div>
+    <div class="form-group"><label>Property Description *</label><textarea id="l-desc" placeholder="Describe the property — condition, features, environment..."></textarea></div>
+    <div class="form-row">
+      <div class="form-group"><label>Rooms *</label><input id="l-rooms" type="number" min="1" max="20" placeholder="e.g. 3"/></div>
+      <div class="form-group"><label>Toilets *</label><input id="l-toilets" type="number" min="1" max="10" placeholder="e.g. 2"/></div>
+    </div>
+    <div class="form-group"><label>Nearest Bus Stop / Landmark</label><input id="l-busstop" type="text" placeholder="e.g. Shasha Market Bus Stop"/></div>
+    <div class="form-row">
+      <div class="form-group"><label>Annual Rent (₦) *</label><input id="l-rent" type="number" placeholder="e.g. 400000"/></div>
+      <div class="form-group"><label>Agreement / Caution Fee (₦)</label><input id="l-agree" type="number" placeholder="e.g. 50000"/></div>
+    </div>
+    <div id="agent-fee-group" class="form-group" style="display:none">
+      <label>Agent Fee %</label>
+      <select id="l-agentfee"><option value="0">Not Applicable</option><option value="10">10%</option><option value="15">15% (NaijaRent Agent — auto)</option><option value="20">20%</option></select>
+    </div>
+    <div id="affiliate-fee-notice" class="alert alert-gold" style="display:none">
+      💰 As a NaijaRent Agent, your listings automatically include <strong>15% agent fee</strong>. You earn <strong>10%</strong>, NaijaRent earns <strong>5%</strong>.
+    </div>
+    <div class="tag-section">Property Photos & Videos</div>
+    <div class="media-upload-area" id="media-upload-area">
+      <input type="file" id="l-media" accept="image/*,video/*" multiple onchange="handleMediaUpload(this)"/>
+      <span style="font-size:28px">📸</span>
+      <div style="font-size:14px;font-weight:600;margin-top:8px">Upload Photos & Videos</div>
+      <div style="font-size:12px;color:var(--muted)">Drag & drop or click. Multiple files supported (images + videos)</div>
+    </div>
+    <div id="media-preview-grid" class="media-gallery" style="margin-top:12px"></div>
+    <div class="tag-section">Amenities & Features</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px">
+      <div class="form-check"><input type="checkbox" id="l-pop"/><label for="l-pop">🎨 POP Ceiling</label></div>
+      <div class="form-check"><input type="checkbox" id="l-parking"/><label for="l-parking">🚗 Parking Space</label></div>
+      <div class="form-check"><input type="checkbox" id="l-fenced"/><label for="l-fenced">🧱 Fenced Compound</label></div>
+      <div class="form-check"><input type="checkbox" id="l-water"/><label for="l-water">💧 Running Water</label></div>
+      <div class="form-check"><input type="checkbox" id="l-gen"/><label for="l-gen">⚡ Prepaid Meter</label></div>
+      <div class="form-check"><input type="checkbox" id="l-borehole"/><label for="l-borehole">🔩 Borehole</label></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-dark" onclick="closeModal('modal-listing')">Cancel</button>
+      <button class="btn btn-primary" onclick="submitListing()">Submit Listing →</button>
+    </div>
+  </div>
+</div>
+
+<!-- View House Modal -->
+<div class="modal-overlay" id="modal-view">
+  <div class="modal" style="max-width:680px;position:relative">
+    <button class="close-btn" onclick="closeModal('modal-view')">✕</button>
+    <div id="modal-view-content"></div>
+  </div>
+</div>
+
+<!-- Payment Modal -->
+<div class="modal-overlay" id="modal-pay">
+  <div class="modal" style="max-width:500px;position:relative">
+    <button class="close-btn" onclick="closeModal('modal-pay')">✕</button>
+    <h3>💳 Secure Rent Payment</h3>
+    <div id="modal-pay-content"></div>
+  </div>
+</div>
+
+<!-- Review Modal -->
+<div class="modal-overlay" id="modal-review">
+  <div class="modal" style="max-width:440px;position:relative">
+    <button class="close-btn" onclick="closeModal('modal-review')">✕</button>
+    <h3>⭐ Write a Review</h3>
+    <div id="modal-review-content"></div>
+  </div>
+</div>
+
+<!-- Apply Modal -->
+<div class="modal-overlay" id="modal-apply">
+  <div class="modal" style="max-width:480px;position:relative">
+    <button class="close-btn" onclick="closeModal('modal-apply')">✕</button>
+    <h3>📝 Submit Tenancy Application</h3>
+    <div id="modal-apply-content"></div>
+  </div>
+</div>
+
+<!-- Message Modal -->
+<div class="modal-overlay" id="modal-msg">
+  <div class="modal" style="max-width:500px;position:relative">
+    <button class="close-btn" onclick="closeModal('modal-msg')">✕</button>
+    <div id="modal-msg-content"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><!-- ══ MODAL: RENTREC CHATBOT ══ -->
+<div class="modal-overlay" id="modal-rentrec">
+  <div class="modal" style="max-width:560px;position:relative;padding:0;overflow:hidden;border-radius:20px">
+    <div style="background:linear-gradient(135deg,#0f3460,#1a4a7a);color:#fff;padding:20px 24px;display:flex;align-items:center;gap:14px">
+      <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#25a663,#1a7a4a);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🤖</div>
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800">RentRec</div>
+        <div style="font-size:12px;opacity:.75">Your Financial Housing Advisor · Always Online</div>
+      </div>
+      <button onclick="closeModal('modal-rentrec')" style="margin-left:auto;background:rgba(255,255,255,.15);border:none;color:#fff;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:16px">✕</button>
+    </div>
+    <div id="rentrec-messages" style="height:340px;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:10px;background:var(--light)"></div>
+    <div style="padding:16px 20px;background:var(--white);border-top:1px solid var(--border);display:flex;gap:10px">
+      <input id="rentrec-input" placeholder="Ask about rent, budget, agreements..." style="flex:1;padding:11px 14px;border-radius:10px;border:1.5px solid var(--border);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border .2s" onkeypress="if(event.key==='Enter')sendRentRec()" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border)'"/>
+      <button class="btn btn-primary" onclick="sendRentRec()" style="padding:11px 18px">Send</button>
+    </div>
+    <div style="padding:0 20px 14px;background:var(--white)">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Quick questions:</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="btn btn-ghost btn-sm" onclick="askRentRec('Can I afford a ₦400,000/yr flat?')" style="font-size:11px">Can I afford ₦400k/yr?</button>
+        <button class="btn btn-ghost btn-sm" onclick="askRentRec('What documents do I need to rent?')" style="font-size:11px">What docs do I need?</button>
+        <button class="btn btn-ghost btn-sm" onclick="askRentRec('What is a caution fee?')" style="font-size:11px">What is caution fee?</button>
+        <button class="btn btn-ghost btn-sm" onclick="askRentRec('What should I check before paying?')" style="font-size:11px">Pre-payment checklist</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL: COMPLAINT ══ -->
+<div class="modal-overlay" id="modal-complaint">
+  <div class="modal" style="max-width:500px;position:relative">
+    <button class="close-btn" onclick="closeModal('modal-complaint')">✕</button>
+    <h3>📣 Submit a Complaint</h3>
+    <p style="color:var(--muted);font-size:14px;margin-bottom:20px">Report an issue with a property, landlord, agent, or the platform. We take all complaints seriously.</p>
+    <div class="form-group"><label>Complaint Category *</label>
+      <select id="cmp-cat">
+        <option value="">Select category</option>
+        <option>Property Misrepresentation</option>
+        <option>Landlord/Agent Misconduct</option>
+        <option>Payment Issue</option>
+        <option>Scam / Fraud Alert</option>
+        <option>Maintenance / Poor Condition</option>
+        <option>Noise / Neighbour Issue</option>
+        <option>Illegal Eviction</option>
+        <option>Platform Technical Issue</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Property / Person Involved (optional)</label>
+      <input id="cmp-target" type="text" placeholder="Address of property or name of person"/></div>
+    <div class="form-group"><label>Complaint Details *</label>
+      <textarea id="cmp-body" placeholder="Describe the issue in detail. Include dates, amounts, and any evidence you have..." style="min-height:120px"></textarea>
+    </div>
+    <div class="form-group"><label>Preferred Resolution</label>
+      <select id="cmp-resolution">
+        <option value="">What outcome do you want?</option>
+        <option>Refund / Compensation</option>
+        <option>Listing Removal</option>
+        <option>User Ban / Account Suspension</option>
+        <option>Mediation / Investigation</option>
+        <option>Just Reporting (no action needed)</option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-dark" onclick="closeModal('modal-complaint')">Cancel</button>
+      <button class="btn btn-danger" onclick="submitComplaint()">📣 Submit Complaint</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════ CONSTANTS ══════════
+const PLATFORM_ACCOUNT = { name:'Olanrewaju Joseph Sunday', bank:'GTBank', number:'0235949599' };
+const PLATFORM_FEE_PCT = 10;
+const AFFILIATE_AGENT_FEE = 15;   // total
+const AFFILIATE_AGENT_EARN = 10;  // agent keeps
+const AFFILIATE_PLATFORM_FEE = 5; // NaijaRent from affiliate listings
+const SALARY_MAP = { below_50k:25000,'50k_100k':75000,'100k_200k':150000,'200k_500k':350000,above_500k:700000 };
+const HOUSE_TYPE_ORDER = { room_and_parlour:1,self_contained:2,'2_bedroom_flat':3,'3_bedroom_flat':4,bungalow:5,duplex:6 };
+const HOUSE_TYPE_LABELS = { room_and_parlour:'Room & Parlour',self_contained:'Self-Contained','2_bedroom_flat':'2-Bedroom Flat','3_bedroom_flat':'3-Bedroom Flat',bungalow:'Bungalow',duplex:'Duplex' };
+
+// ══════════ DATABASE ══════════
+const DB = {
+  users: [
+    // TENANTS
+    { id:'u1',fname:'Chioma',lname:'Okafor',username:'chioma_naija',phone:'08111111111',password:'demo123',role:'tenant',email:'chioma@gmail.com',nin:'11122233345',employment:'employed',jobrole:'Nurse',salary:'100k_200k',area:'Akure',housetype:'2_bedroom_flat',saved:[],applications:[],kinName:'Mrs Ngozi Okafor',kinRel:'Parent',kinPhone:'08111111112',kinAddr:'Owerri, Imo State',profilePic:'' },
+    { id:'u11',fname:'Adewale',lname:'Adeyinka',username:'adewale_ibadan',phone:'08444444444',password:'demo123',role:'tenant',email:'wale@gmail.com',nin:'22233344456',employment:'self_employed',jobrole:'Trader',salary:'50k_100k',area:'Ibadan',housetype:'self_contained',saved:[],applications:[],kinName:'Bola Adeyinka',kinRel:'Spouse',kinPhone:'08444444445',kinAddr:'Ibadan, Oyo State',profilePic:'' },
+    { id:'u12',fname:'Fatima',lname:'Mohammed',username:'fatima_abuja',phone:'08555555555',password:'demo123',role:'tenant',email:'fatima@gmail.com',nin:'33344455567',employment:'employed',jobrole:'Civil Servant',salary:'100k_200k',area:'Abuja',housetype:'3_bedroom_flat',saved:[],applications:[],kinName:'Musa Mohammed',kinRel:'Sibling',kinPhone:'08555555556',kinAddr:'Abuja, FCT',profilePic:'' },
+    // LANDLORDS
+    { id:'u2',fname:'Emeka',lname:'Adeyemi',username:'emeka_landlord',phone:'08222222222',password:'demo123',role:'landlord',email:'emeka@gmail.com',bank:'GTBank',accnum:'0123456789',accname:'Emeka Adeyemi',profilePic:'' },
+    { id:'u13',fname:'Mrs Kehinde',lname:'Bello',username:'mrs_bello',phone:'08666666666',password:'demo123',role:'landlord',email:'kehinde@gmail.com',bank:'First Bank',accnum:'2345678901',accname:'Kehinde Bello',profilePic:'' },
+    // AGENTS
+    { id:'u3',fname:'Tunde',lname:'Fashola',username:'tunde_agent',phone:'08333333333',password:'demo123',role:'agent',email:'tunde@agent.ng',bank:'Zenith Bank',accnum:'9876543210',accname:'Tunde Fashola',profilePic:'' },
+    // AFFILIATE AGENTS
+    { id:'u14',fname:'Amaka',lname:'Eze',username:'amaka_affiliate',phone:'08777777777',password:'demo123',role:'affiliate',email:'amaka@gmail.com',nin:'44455566678',phone:'08777777777',state:'Ondo',lga:'Akure South',workplace:'No. 5 Oyemekun, Akure',bank:'Opay',accnum:'8012345678',accname:'Amaka Eze',dob:'1998-05-12',gender:'Female',verified:true,profilePic:'' },
+    // ADMIN
+    { id:'u0',fname:'Admin',lname:'NaijaRent',username:'admin_nr',phone:'08000000000',password:'admin123',role:'admin',email:'admin@naijarent.ng',profilePic:'' },
+  ],
+  listings: [
+    // ── AKURE (6) ──
+    { id:'h1',address:'12 Arakale Road, Akure',city:'Akure',type:'2_bedroom_flat',desc:'Spacious 2-bedroom flat in serene environment with good ventilation. Tiled floors throughout. Close to primary school. Quiet neighbourhood.',rooms:2,toilets:2,busstop:'Fiwasaye Bus Stop',pop:true,parking:true,fenced:true,water:true,gen:false,borehole:true,rent:400000,agree:50000,agentfee:0,listedby:'u2',verified:true,occupied:false,media:[],lat:7.252,lng:5.193 },
+    { id:'h2',address:'5 Oyemekun Road, Akure',city:'Akure',type:'2_bedroom_flat',desc:'Newly painted 2-bedroom flat. Good ventilation and natural lighting. Quiet neighbourhood ideal for families. Close to FUTA.',rooms:2,toilets:1,busstop:'Shasha Market',pop:false,parking:false,fenced:true,water:true,gen:false,borehole:false,rent:280000,agree:30000,agentfee:15,listedby:'u3',verified:true,occupied:false,media:[],lat:7.245,lng:5.201 },
+    { id:'h3',address:'3 Oba-Ile Road, Akure',city:'Akure',type:'3_bedroom_flat',desc:'Premium 3-bedroom flat with POP ceiling, parking space, and 24hr security. Great for large families. Generator available.',rooms:3,toilets:2,busstop:'Oba-Ile Junction',pop:true,parking:true,fenced:true,water:true,gen:true,borehole:true,rent:700000,agree:70000,agentfee:15,listedby:'u3',verified:false,occupied:false,media:[],lat:7.260,lng:5.186 },
+    { id:'h4',address:'8 Ijoka Road, Akure',city:'Akure',type:'self_contained',desc:'Affordable self-contained apartment ideal for single occupants. Clean safe compound. Close to ring road.',rooms:1,toilets:1,busstop:'Ijoka Roundabout',pop:false,parking:false,fenced:false,water:true,gen:false,borehole:false,rent:120000,agree:15000,agentfee:0,listedby:'u2',verified:true,occupied:true,media:[],lat:7.238,lng:5.208 },
+    { id:'h5',address:'22 Lagos Road, Akure',city:'Akure',type:'bungalow',desc:'Executive bungalow with 4 rooms, massive compound, prepaid meter, and borehole. Perfect for corporate executives and large families.',rooms:4,toilets:3,busstop:'Ring Road',pop:true,parking:true,fenced:true,water:true,gen:true,borehole:true,rent:1200000,agree:120000,agentfee:5,listedby:'u2',verified:true,occupied:false,media:[],lat:7.267,lng:5.179 },
+    { id:'h6',address:'14 Isolo Estate, Akure',city:'Akure',type:'room_and_parlour',desc:'Clean room and parlour in Isolo Estate. Good for young couples or single working-class individuals. Borehole water supply.',rooms:1,toilets:1,busstop:'Isolo Junction',pop:false,parking:false,fenced:true,water:true,gen:false,borehole:true,rent:95000,agree:10000,agentfee:0,listedby:'u13',verified:true,occupied:false,media:[],lat:7.243,lng:5.197 },
+    // ── OTHER CITIES (8) ──
+    { id:'h7',address:'17 Allen Avenue, Ikeja, Lagos',city:'Lagos',type:'3_bedroom_flat',desc:'Modern 3-bedroom flat in heart of Ikeja. Walking distance to Allen bus stop. Tiled throughout. All rooms en-suite.',rooms:3,toilets:3,busstop:'Allen Bus Stop',pop:true,parking:true,fenced:true,water:true,gen:true,borehole:false,rent:1500000,agree:150000,agentfee:15,listedby:'u3',verified:true,occupied:false,media:[],lat:6.601,lng:3.351 },
+    { id:'h8',address:'45 Bodija Market Road, Ibadan',city:'Ibadan',type:'2_bedroom_flat',desc:'Well-maintained 2-bedroom flat in Bodija. Water and light available. Close to UI teaching hospital and market.',rooms:2,toilets:1,busstop:'Bodija Market',pop:false,parking:false,fenced:true,water:true,gen:false,borehole:true,rent:350000,agree:40000,agentfee:10,listedby:'u2',verified:true,occupied:false,media:[],lat:7.399,lng:3.906 },
+    { id:'h9',address:'7 Wuse Zone 4, Abuja',city:'Abuja',type:'3_bedroom_flat',desc:'Executive 3-bedroom flat in Wuse Zone 4. Fully serviced building, 24hr security, CCTV, standby generator. Premium living.',rooms:3,toilets:3,busstop:'Wuse Market',pop:true,parking:true,fenced:true,water:true,gen:true,borehole:true,rent:2800000,agree:280000,agentfee:15,listedby:'u14',verified:true,occupied:false,media:[],lat:9.058,lng:7.491 },
+    { id:'h10',address:'33 Old GRA, Port Harcourt',city:'Port Harcourt',type:'duplex',desc:'Beautiful duplex in old GRA. 5 bedrooms, 4 bathrooms, large sitting room, study, servant quarters. Prime location.',rooms:5,toilets:4,busstop:'GRA Junction',pop:true,parking:true,fenced:true,water:true,gen:true,borehole:true,rent:3500000,agree:350000,agentfee:20,listedby:'u3',verified:true,occupied:true,media:[],lat:4.815,lng:7.049 },
+    { id:'h11',address:'12 Mission Road, Benin City',city:'Benin City',type:'2_bedroom_flat',desc:'Decent 2-bedroom flat near Mission Road. Tiled floors, POP ceiling, borehole. Very accessible location.',rooms:2,toilets:2,busstop:'Mission Road Bus Stop',pop:true,parking:true,fenced:true,water:true,gen:false,borehole:true,rent:450000,agree:50000,agentfee:10,listedby:'u13',verified:true,occupied:false,media:[],lat:6.337,lng:5.627 },
+    { id:'h12',address:'19 New Layout, Enugu',city:'Enugu',type:'self_contained',desc:'Modern self-contained apartment in New Layout. Recently renovated, prepaid meter, good water supply. Quiet and safe environment.',rooms:1,toilets:1,busstop:'New Layout Junction',pop:true,parking:false,fenced:true,water:true,gen:false,borehole:false,rent:180000,agree:20000,agentfee:0,listedby:'u2',verified:true,occupied:false,media:[],lat:6.441,lng:7.499 },
+    { id:'h13',address:'8 Asubiaro Road, Osogbo',city:'Osogbo',type:'3_bedroom_flat',desc:'Newly built 3-bedroom flat in Osogbo. Large compound, excellent ventilation, borehole, and prepaid meter. Owner lives nearby.',rooms:3,toilets:2,busstop:'Asubiaro Bus Stop',pop:true,parking:true,fenced:true,water:true,gen:true,borehole:true,rent:420000,agree:45000,agentfee:5,listedby:'u14',verified:true,occupied:false,media:[],lat:7.774,lng:4.556 },
+    { id:'h14',address:'54 Effurun Road, Warri',city:'Warri',type:'bungalow',desc:'Spacious 3-room bungalow in Effurun. Quiet street, fenced compound, parking space. Good for families with children. Nearby school.',rooms:3,toilets:2,busstop:'Effurun Roundabout',pop:false,parking:true,fenced:true,water:true,gen:false,borehole:true,rent:380000,agree:40000,agentfee:10,listedby:'u3',verified:false,occupied:false,media:[],lat:5.580,lng:5.778 },
+  ],
+  transactions: [
+    { id:'t1',houseId:'h1',tenantId:'u1',landlordId:'u2',amount:450000,platform_fee:45000,landlord_recv:405000,agent_fee:0,date:'2025-01-15',status:'completed',ref:'NJR-2025-001' },
+    { id:'t2',houseId:'h8',tenantId:'u11',landlordId:'u2',amount:390000,platform_fee:35000,landlord_recv:315000,agent_fee:40000,date:'2025-03-01',status:'completed',ref:'NJR-2025-002' },
+  ],
+  applications: [
+    { id:'a1',houseId:'h2',tenantId:'u1',landlordId:'u3',status:'pending',message:'I am a nurse at FUTA clinic. I earn ₦150,000/month and can afford this. References available.',date:'2025-02-20' },
+    { id:'a2',houseId:'h7',tenantId:'u12',landlordId:'u3',status:'approved',message:'Civil servant at Federal Secretariat. Steady income. References from current landlord available.',date:'2025-03-05' },
+  ],
+  reviews: [
+    { id:'r1',houseId:'h1',tenantId:'u1',rating:5,comment:'Excellent property! Landlord Emeka is very cooperative. The compound is clean and neighbours are respectful.',date:'2025-01-20' },
+    { id:'r2',houseId:'h8',tenantId:'u11',rating:4,comment:'Good location, close to market and UI. Could use a little maintenance but overall value for money.',date:'2025-02-01' },
+  ],
+  messages: [
+    { id:'m1',from:'u1',to:'u2',houseId:'h1',text:'Good day sir, I am interested in your 2-bedroom flat on Arakale Road. Is it still available?',time:'10:30 AM',date:'2025-02-20' },
+    { id:'m2',from:'u2',to:'u1',houseId:'h1',text:'Yes it is still available. You can come for inspection any weekday morning.',time:'2:15 PM',date:'2025-02-20' },
+    { id:'m3',from:'u1',to:'u2',houseId:'h1',text:'Thank you! I will come on Wednesday morning. Please can I pay online through NaijaRent?',time:'2:45 PM',date:'2025-02-20' },
+  ],
+  affiliateApplications: [],
+  complaints: [
+    {id:'c1',userId:'u1',category:'Property Misrepresentation',target:'8 Ijoka Road, Akure',body:'The photos showed a renovated interior but the actual property was in poor condition. Paint was peeling and the borehole was not working.',resolution:'Refund / Compensation',status:'reviewing',date:'2025-03-01'},
+  ],
+  nextUserId:20,nextListingId:20,nextTxnId:10,nextAppId:10,nextRevId:10,nextMsgId:10,nextCmpId:10,
+};
+
+let currentUser=null, selectedRole='tenant', currentChatPartner=null, currentChatHouseId=null;
+let listingMedia = [];
+
+// ══════════ NAVIGATION ══════════
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function selectRoleAndRegister(role){ showPage('page-register'); selectRole(role); }
+function selectRole(role){
+  selectedRole=role;
+  ['tenant','landlord','agent'].forEach(r=>{
+    const el=document.getElementById('role-'+r);
+    if(el) el.classList.toggle('selected',r===role);
+  });
+  g('tenant-extra').style.display=role==='tenant'?'block':'none';
+  g('bank-extra').style.display=(role==='landlord'||role==='agent')?'block':'none';
+}
+
+// ══════════ AUTH ══════════
+function register(){
+  const fname=v('reg-fname'),lname=v('reg-lname'),phone=v('reg-phone'),password=v('reg-password'),username=v('reg-username').toLowerCase();
+  if(!fname||!lname||!phone||!password||!username){toast('Please fill all required fields','error');return}
+  if(phone.length<11){toast('Enter a valid Nigerian phone number','error');return}
+  if(password.length<6){toast('Password must be at least 6 characters','error');return}
+  if(DB.users.find(u=>u.phone===phone)){toast('Phone number already registered','error');return}
+  if(DB.users.find(u=>u.username===username)){toast('Username already taken. Choose another.','error');return}
+  const user={id:'u'+(++DB.nextUserId),fname,lname,username,phone,password,email:v('reg-email'),role:selectedRole,saved:[],applications:[],profilePic:picDataURL['reg-pic-input']||''};
+  if(selectedRole==='tenant'){
+    user.nin=v('reg-nin');user.employment=v('reg-employment');user.jobrole=v('reg-jobrole');
+    user.salary=v('reg-salary');user.area=v('reg-area');user.housetype=v('reg-housetype');
+    user.kinName=v('reg-kin-name');user.kinRel=v('reg-kin-rel');user.kinPhone=v('reg-kin-phone');user.kinAddr=v('reg-kin-addr');
+    if(!user.salary||!user.area||!user.housetype){toast('Please complete your housing profile','error');return}
+  } else {
+    user.bank=v('reg-bank');user.accnum=v('reg-accnum');user.accname=v('reg-accname');
+    if(!user.bank||!user.accnum||!user.accname){toast('Please add your bank account details','error');return}
+  }
+  DB.users.push(user);
+  currentUser=user;
+  toast('Account created! Welcome to NaijaRent 🎉','success');
+  loadDashboard();
+}
+function login(){
+  const loginId=v('login-id').toLowerCase(),password=v('login-password');
+  const user=DB.users.find(u=>(u.phone===loginId||u.username===loginId.replace('@',''))&&u.password===password);
+  if(!user){toast('Incorrect username/phone or password','error');return}
+  currentUser=user;
+  toast('Welcome back, '+user.fname+'! 👋','success');
+  loadDashboard();
+}
+function logout(){ currentUser=null; showPage('page-landing'); toast('You have been signed out','success'); }
+
+function registerAffiliate(){
+  const fname=v('aff-fname'),lname=v('aff-lname'),username=v('aff-username').toLowerCase();
+  const phone=v('aff-phone'),email=v('aff-email'),nin=v('aff-nin'),dob=v('aff-dob'),password=v('aff-password');
+  const bank=v('aff-bank'),accnum=v('aff-accnum'),accname=v('aff-accname');
+  const state=v('aff-state'),lga=v('aff-lga');
+  if(!fname||!lname||!username||!phone||!email||!nin||!dob||!password||!bank||!accnum||!accname||!state||!lga){
+    toast('Please fill all required fields','error');return
+  }
+  if(!g('aff-agree').checked){toast('Please agree to the affiliate terms','error');return}
+  const age=Math.floor((new Date()-new Date(dob))/(365.25*24*3600*1000));
+  if(age<18){toast('You must be at least 18 years old to register as an agent','error');return}
+  if(nin.length!==11){toast('NIN must be exactly 11 digits','error');return}
+  if(DB.users.find(u=>u.username===username)){toast('Username already taken','error');return}
+  if(DB.users.find(u=>u.phone===phone)){toast('Phone number already registered','error');return}
+  const user={id:'u'+(++DB.nextUserId),fname,lname,username,phone,email,nin,dob,password,role:'affiliate',state,lga,
+    workplace:v('aff-workplace'),gender:v('aff-gender'),bank,accnum,accname,verified:false,
+    profilePic:picDataURL['aff-pic-input']||'',saved:[],applications:[]};
+  DB.users.push(user);
+  currentUser=user;
+  toast('Affiliate application submitted! Pending admin verification. 🎉','success');
+  setTimeout(()=>loadDashboard(),1500);
+}
+
+// ══════════ DASHBOARD ══════════
+function loadDashboard(){
+  showPage('page-dashboard');
+  const nameEl=g('sb-name'),uEl=g('sb-username'),roleEl=g('sb-role'),avatarEl=g('sb-avatar');
+  nameEl.textContent=currentUser.fname+' '+currentUser.lname;
+  uEl.textContent='@'+currentUser.username;
+  roleEl.textContent=currentUser.role==='affiliate'?'NaijaRent Agent':currentUser.role.charAt(0).toUpperCase()+currentUser.role.slice(1);
+  if(currentUser.profilePic){
+    avatarEl.innerHTML=`<img src="${currentUser.profilePic}" style="width:100%;height:100%;object-fit:cover;border-radius:50%"/>`;
+  } else {
+    avatarEl.textContent=currentUser.role==='tenant'?'👤':currentUser.role==='landlord'?'🏡':currentUser.role==='affiliate'?'💰':'🤝';
+  }
+  updateStats(); buildNav();
+  if(currentUser.role==='tenant') renderTenantHome();
+  else if(currentUser.role==='landlord'||currentUser.role==='agent') renderLandlordHome();
+  else if(currentUser.role==='affiliate') renderAffiliateHome();
+  else renderAdminPanel();
+}
+function buildNav(){
+  const navEl=g('sb-nav');
+  let items=[];
+  if(currentUser.role==='tenant'){
+    items=[
+      {icon:'🏠',label:'My Recommendations',fn:'renderTenantHome'},
+      {icon:'🤖',label:'RentRec Advisor',fn:'openRentRec'},
+      {icon:'🔍',label:'Browse All Houses',fn:'renderBrowse'},
+      {icon:'🗺️',label:'Map View',fn:'renderMapView'},
+      {icon:'📝',label:'My Applications',fn:'renderMyApplications'},
+      {icon:'💳',label:'Payment History',fn:'renderPaymentHistory'},
+      {icon:'💬',label:'Messages',fn:'renderMessages'},
+      {icon:'❤️',label:'Saved Listings',fn:'renderSaved'},
+      {icon:'📣',label:'Complaints',fn:'renderComplaints'},
+      {icon:'👤',label:'My Profile',fn:'renderProfile'},
+    ];
+  } else if(currentUser.role==='admin'){
+    items=[
+      {icon:'📊',label:'Overview',fn:'renderAdminPanel'},
+      {icon:'✅',label:'Approve Listings',fn:'renderAdminListings'},
+      {icon:'👥',label:'All Users',fn:'renderAdminUsers'},
+      {icon:'💳',label:'All Transactions',fn:'renderAdminTransactions'},
+      {icon:'🤝',label:'Agent Applications',fn:'renderAdminAgents'},
+      {icon:'📣',label:'Complaints',fn:'renderAdminComplaints'},
+    ];
+  } else if(currentUser.role==='affiliate'){
+    items=[
+      {icon:'📊',label:'My Dashboard',fn:'renderAffiliateHome'},
+      {icon:'➕',label:'Add Listing',fn:'openListingModal'},
+      {icon:'🏘️',label:'My Listings',fn:'renderMyListings'},
+      {icon:'📝',label:'Applications',fn:'renderApplicationsReceived'},
+      {icon:'💰',label:'My Earnings',fn:'renderEarnings'},
+      {icon:'💬',label:'Messages',fn:'renderMessages'},
+      {icon:'👤',label:'My Profile',fn:'renderProfile'},
+    ];
+  } else {
+    items=[
+      {icon:'📊',label:'Dashboard',fn:'renderLandlordHome'},
+      {icon:'➕',label:'Add Listing',fn:'openListingModal'},
+      {icon:'🏘️',label:'My Listings',fn:'renderMyListings'},
+      {icon:'📝',label:'Applications',fn:'renderApplicationsReceived'},
+      {icon:'💳',label:'Earnings',fn:'renderEarnings'},
+      {icon:'💬',label:'Messages',fn:'renderMessages'},
+      {icon:'📣',label:'Complaints',fn:'renderComplaints'},
+      {icon:'👤',label:'My Profile',fn:'renderProfile'},
+    ];
+  }
+  navEl.innerHTML=items.map((it,i)=>`<div class="sb-item${i===0?' active':''}" id="nav-item-${i}" onclick="${it.fn}();setActiveNav(${i})"><span class="icon">${it.icon}</span>${it.label}</div>`).join('');
+}
+function setActiveNav(idx){ document.querySelectorAll('.sb-item').forEach(el=>el.classList.remove('active')); const el=g('nav-item-'+idx); if(el)el.classList.add('active'); }
+function updateStats(){
+  g('stat-listings').textContent=DB.listings.filter(l=>l.verified).length;
+  g('stat-tenants').textContent=DB.users.filter(u=>u.role==='tenant').length;
+  const total=DB.transactions.reduce((s,t)=>s+t.amount,0);
+  g('stat-txn').textContent='₦'+fmtN(total);
+}
+
+// ══════════ RECOMMENDATION ENGINE ══════════
+function getAnnualIncome(s){ return (SALARY_MAP[s]||75000)*12; }
+function getBudgetTiers(income){ return {affordable:income*0.33,stretch:income*0.50,aspirational:income*0.70,income}; }
+function scoreHouse(tenant,house){
+  const income=getAnnualIncome(tenant.salary),tiers=getBudgetTiers(income),rent=house.rent;
+  let afford,tier;
+  if(rent<=tiers.affordable){afford=100;tier='affordable';}
+  else if(rent<=tiers.stretch){const r=(rent-tiers.affordable)/(tiers.stretch-tiers.affordable);afford=70-r*30;tier='stretch';}
+  else if(rent<=tiers.aspirational){const r=(rent-tiers.stretch)/(tiers.aspirational-tiers.stretch);afford=40-r*30;tier='aspirational';}
+  else{afford=0;tier='over';}
+  const prefArea=(tenant.area||'').toLowerCase(),hCity=(house.city||'').toLowerCase();
+  const locScore=prefArea&&hCity.includes(prefArea)?100:prefArea&&hCity.split(' ').some(w=>prefArea.includes(w))?60:20;
+  const prefType=HOUSE_TYPE_ORDER[tenant.housetype]||0,hType=HOUSE_TYPE_ORDER[house.type]||0;
+  const typeScore=prefType===hType?100:Math.abs(prefType-hType)===1?60:20;
+  const amenScore=[house.pop,house.parking,house.fenced,house.toilets>=2].filter(Boolean).length*25;
+  const final=afford*0.4+locScore*0.3+typeScore*0.2+amenScore*0.1;
+  return {afford:Math.round(afford),locScore,typeScore,amenScore,final:Math.round(final*10)/10,tier,pct:Math.round((rent/income)*100)};
+}
+function getRecommendations(tenant){
+  const income=getAnnualIncome(tenant.salary),tiers=getBudgetTiers(income);
+  const scored=DB.listings.filter(l=>l.verified&&!l.occupied).map(h=>({...h,...scoreHouse(tenant,h)}));
+  scored.sort((a,b)=>b.final-a.final);
+  return {tiers,income,affordable:scored.filter(h=>h.tier==='affordable'),stretch:scored.filter(h=>h.tier==='stretch'),aspirational:scored.filter(h=>h.tier==='aspirational'),all:scored};
+}
+
+// ══════════ TENANT PANELS ══════════
+function renderTenantHome(){
+  setPanelTitle('My Recommendations'); setHeaderActions(`<button class="btn btn-primary" style="gap:6px" onclick="openRentRec()">🤖 Chat with RentRec</button>`);
+  const rec=getRecommendations(currentUser);
+  let html=`
+  <!-- RentRec Teaser Banner -->
+  <div style="background:linear-gradient(135deg,#0f3460 0%,#1a4a7a 100%);color:#fff;border-radius:16px;padding:22px 28px;margin-bottom:24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden">
+    <div style="position:absolute;right:-10px;bottom:-20px;font-size:100px;opacity:.07">🤖</div>
+    <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#25a663,#1a7a4a);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0">🤖</div>
+    <div style="flex:1">
+      <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;margin-bottom:4px">RentRec — Your Financial Housing Advisor</div>
+      <div style="opacity:.8;font-size:13px;line-height:1.5">Get personalized rent advice, budget analysis, and answers to all your housing questions before signing any agreement.</div>
+    </div>
+    <button class="btn btn-gold btn-sm" onclick="openRentRec()" style="flex-shrink:0">Chat Now →</button>
+  </div>
+  <div class="advisor-box">
+    <h3>💡 Your Financial Housing Advisor</h3>
+    <p>Based on your estimated annual income of <strong>₦${fmtN(rec.income)}</strong>, here is your personalized budget breakdown:</p>
+    <div class="budget-grid">
+      <div class="budget-item"><div class="bi-label">Annual Income (est.)</div><div class="bi-val">₦${fmtN(rec.income)}</div></div>
+      <div class="budget-item"><div class="bi-label">✅ Comfortable Budget</div><div class="bi-val">₦${fmtN(rec.tiers.affordable)}/yr</div></div>
+      <div class="budget-item"><div class="bi-label">⚡ Maximum Stretch</div><div class="bi-val">₦${fmtN(rec.tiers.stretch)}/yr</div></div>
+    </div></div>`;
+  if(rec.affordable.length){
+    html+=`<div class="sec-header"><h3>✅ Perfect for You (${rec.affordable.length})</h3></div><div class="cards-grid">${rec.affordable.map(h=>houseCardHTML(h,'affordable')).join('')}</div>`;
+  }
+  if(rec.stretch.length){
+    html+=`<div class="sec-header" style="margin-top:32px"><h3>⚡ Stretch Goal (${rec.stretch.length})</h3></div>`;
+    html+=`<div class="alert alert-warn">These homes are slightly above your comfortable budget. With a payment plan you can manage them.</div>`;
+    html+=`<div class="cards-grid">${rec.stretch.map(h=>houseCardHTML(h,'stretch')).join('')}</div>`;
+  }
+  if(rec.aspirational.length){
+    html+=`<div class="sec-header" style="margin-top:32px"><h3>💫 Aspirational (${rec.aspirational.length})</h3></div><div class="cards-grid">${rec.aspirational.map(h=>houseCardHTML(h,'aspirational')).join('')}</div>`;
+  }
+  if(!rec.all.length) html+=emptyState('🏚️','No listings yet','Landlords are adding properties daily — check back soon!');
+  setBody(html);
+}
+function renderBrowse(){
+  setPanelTitle('Browse All Houses'); setHeaderActions('');
+  const cities=['Abuja','Akure','Benin City','Enugu','Ibadan','Kano','Lagos','Osogbo','Port Harcourt','Warri'];
+  let html=`<div class="search-bar">
+    <input id="s-kw" placeholder="🔍 Search address, area..." oninput="filterListings()"/>
+    <select id="s-city" onchange="filterListings()"><option value="">All Cities</option>${cities.map(c=>`<option>${c}</option>`).join('')}</select>
+    <select id="s-type" onchange="filterListings()"><option value="">All Types</option><option value="room_and_parlour">Room & Parlour</option><option value="self_contained">Self-Contained</option><option value="2_bedroom_flat">2-Bedroom Flat</option><option value="3_bedroom_flat">3-Bedroom Flat</option><option value="bungalow">Bungalow</option><option value="duplex">Duplex</option></select>
+    <select id="s-price" onchange="filterListings()"><option value="">Any Price</option><option value="200000">Under ₦200k</option><option value="400000">Under ₦400k</option><option value="700000">Under ₦700k</option><option value="1200000">Under ₦1.2M</option></select>
+    <select id="s-status" onchange="filterListings()"><option value="">All Status</option><option value="vacant">Vacant Only</option><option value="occupied">Occupied</option></select>
+  </div><div id="browse-results" class="cards-grid">${DB.listings.filter(l=>l.verified).map(h=>houseCardHTML(h,'neutral')).join('')}</div>`;
+  setBody(html);
+}
+function filterListings(){
+  const kw=(g('s-kw').value||'').toLowerCase(),city=g('s-city').value,type=g('s-type').value,
+        price=parseInt(g('s-price').value)||0,status=g('s-status').value;
+  const filtered=DB.listings.filter(l=>l.verified).filter(h=>{
+    const statusMatch=!status||(status==='vacant'&&!h.occupied)||(status==='occupied'&&h.occupied);
+    return (!kw||h.address.toLowerCase().includes(kw)||h.city.toLowerCase().includes(kw))&&
+           (!city||h.city===city)&&(!type||h.type===type)&&(!price||h.rent<=price)&&statusMatch;
+  });
+  const c=g('browse-results'); if(!c) return;
+  c.innerHTML=filtered.length?filtered.map(h=>houseCardHTML(h,'neutral')).join(''):emptyState('🔍','No results found','Try adjusting your filters.');
+}
+
+function renderMapView(){
+  setPanelTitle('Map View — Listings Near You'); setHeaderActions('');
+  const cityListings=DB.listings.filter(l=>l.verified);
+  const pins=cityListings.map((h,i)=>{
+    const left=12+((i%6)*14)+'%',top=10+Math.floor(i/6)*38+'%';
+    return `<div class="map-pin" style="left:${left};top:${top}" onclick="viewHouse('${h.id}')">
+      <div class="pin-icon">${h.occupied?'🔒':'🏠'}</div>
+      <div class="pin-label">${h.city}</div>
+      <div class="pin-price">₦${fmtShort(h.rent)}</div>
+    </div>`;
+  }).join('');
+  const cities=['All','Akure','Lagos','Ibadan','Abuja','Port Harcourt','Enugu','Osogbo','Warri','Benin City'];
+  const cityBtns=cities.map(c=>`<button class="btn btn-sm ${c==='All'?'btn-primary':'btn-ghost'}" onclick="filterMap('${c}')">${c}</button>`).join('');
+  let html=`<div class="alert alert-info">Click any pin to view house details. 🔒 = Occupied | 🏠 = Vacant</div>
+    <div class="map-placeholder">
+      <div class="map-header"><span style="font-weight:700;font-size:15px">📍 House Listings Map</span>
+        <div style="display:flex;gap:6px;margin-left:auto;flex-wrap:wrap">${cityBtns}</div>
+      </div>
+      <div class="map-frame"><div class="map-grid"></div>${pins}
+        <div style="position:absolute;bottom:16px;right:16px;background:white;border-radius:8px;padding:10px 14px;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,.15)">
+          <div style="font-weight:700;margin-bottom:6px">Legend</div>
+          <div>🏠 Vacant</div><div>🔒 Occupied</div>
+        </div>
+      </div>
+    </div>
+    <div class="sec-header"><h3>All Verified Listings (${cityListings.length})</h3></div>
+    <div class="cards-grid">${cityListings.map(h=>houseCardHTML(h,'neutral')).join('')}</div>`;
+  setBody(html);
+}
+function filterMap(city){
+  const filtered=city==='All'?DB.listings.filter(l=>l.verified):DB.listings.filter(l=>l.verified&&l.city===city);
+  toast(`Showing ${filtered.length} listings${city!=='All'?' in '+city:''}`, 'success');
+}
+
+function renderMyApplications(){
+  setPanelTitle('My Applications'); setHeaderActions('');
+  const apps=DB.applications.filter(a=>a.tenantId===currentUser.id);
+  let html='';
+  if(!apps.length){ html=emptyState('📝','No applications yet','Browse listings and apply for properties you like.'); }
+  else {
+    html=apps.map(a=>{
+      const h=DB.listings.find(x=>x.id===a.houseId)||{};
+      const owner=DB.users.find(u=>u.id===h.listedby)||{};
+      return `<div class="app-card">
+        <div style="display:flex;align-items:start;justify-content:space-between;margin-bottom:10px">
+          <div><div style="font-weight:700;font-size:15px">${h.address||'Unknown property'}</div>
+          <div style="color:var(--muted);font-size:13px">${HOUSE_TYPE_LABELS[h.type]||''} · ${h.city} · ₦${fmtN(h.rent)}/yr</div></div>
+          <span class="app-status ${a.status}">${a.status}</span>
+        </div>
+        <div style="font-size:13px;color:var(--mid);margin-bottom:12px">"${a.message}"</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:12px">Applied: ${a.date}</div>
+        ${a.status==='approved'?`<button class="btn btn-primary btn-sm" onclick="openPayModal('${h.id}')">💳 Pay Rent Now</button>`:''}
+        <button class="wa-btn" style="margin-left:8px" onclick="openChat('${owner.id}','${h.id}')">💬 Message</button>
+      </div>`;
+    }).join('');
+  }
+  setBody(html);
+}
+
+function renderPaymentHistory(){
+  setPanelTitle('Payment History'); setHeaderActions('');
+  const txns=DB.transactions.filter(t=>t.tenantId===currentUser.id);
+  let html='';
+  if(!txns.length){ html=emptyState('💳','No payments yet','Your rent payment history will appear here.'); }
+  else {
+    html=`<div class="table-wrap"><table>
+      <thead><tr><th>Reference</th><th>Property</th><th>Amount Paid</th><th>Date</th><th>Status</th></tr></thead>
+      <tbody>${txns.map(t=>{
+        const h=DB.listings.find(x=>x.id===t.houseId)||{};
+        return `<tr><td><span style="font-family:monospace;font-size:12px">${t.ref}</span></td><td>${h.address||'—'}</td><td style="font-weight:700">₦${fmtN(t.amount)}</td><td>${t.date}</td><td><span class="app-status completed">${t.status}</span></td></tr>`;
+      }).join('')}</tbody></table></div>`;
+  }
+  setBody(html);
+}
+
+function renderSaved(){
+  setPanelTitle('Saved Listings'); setHeaderActions('');
+  const saved=(currentUser.saved||[]).map(id=>DB.listings.find(h=>h.id===id)).filter(Boolean);
+  setBody(saved.length?`<div class="cards-grid">${saved.map(h=>houseCardHTML(h,'neutral')).join('')}</div>`:emptyState('❤️','No saved listings','Browse houses and tap ❤️ to save them here.'));
+}
+
+function renderMessages(){
+  setPanelTitle('Messages'); setHeaderActions('');
+  const myMsgs=DB.messages.filter(m=>m.from===currentUser.id||m.to===currentUser.id);
+  const partners=[...new Set(myMsgs.map(m=>m.from===currentUser.id?m.to:m.from))];
+  let html='';
+  if(!partners.length){ html=emptyState('💬','No messages yet','Start a conversation from any house listing.'); }
+  else {
+    const chats=partners.map(pid=>{
+      const partner=DB.users.find(u=>u.id===pid)||{};
+      const msgs=myMsgs.filter(m=>m.from===pid||m.to===pid);
+      const last=msgs[msgs.length-1];
+      const houseId=last?.houseId;
+      const house=DB.listings.find(h=>h.id===houseId)||{};
+      return {partner,last,house};
+    });
+    html=`<div class="chat-list">${chats.map(c=>`
+      <div class="chat-item" onclick="openChat('${c.partner.id}','${c.house.id}')">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:18px;overflow:hidden">${c.partner.profilePic?`<img src="${c.partner.profilePic}" style="width:100%;height:100%;object-fit:cover"/>`:c.partner.role==='landlord'?'🏡':'🤝'}</div>
+        <div style="flex:1"><div style="font-weight:700;font-size:14px">${c.partner.fname||'Unknown'} ${c.partner.lname||''}</div>
+          <div style="font-size:12px;color:var(--muted)">${c.last?.text?.substring(0,40)||'No messages'}...</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">Re: ${c.house.address||'—'}</div>
+        </div>
+        <div class="chat-time">${c.last?.time||''}</div>
+      </div>`).join('')}</div>`;
+  }
+  setBody(html);
+}
+
+// ══════════ LANDLORD/AGENT PANELS ══════════
+function renderLandlordHome(){
+  setPanelTitle('Dashboard');
+  setHeaderActions(`<button class="btn btn-primary" onclick="openListingModal()">+ Add Listing</button>`);
+  const myListings=DB.listings.filter(h=>h.listedby===currentUser.id);
+  const myTxns=DB.transactions.filter(t=>t.landlordId===currentUser.id);
+  const totalEarned=myTxns.reduce((s,t)=>s+t.landlord_recv,0);
+  const occupied=myListings.filter(h=>h.occupied).length;
+  const vacant=myListings.filter(h=>!h.occupied&&h.verified).length;
+  let html=`<div class="stat-cards">
+    <div class="stat-card green"><div class="sc-icon">🏘️</div><div class="sc-num">${myListings.length}</div><div class="sc-label">My Listings</div></div>
+    <div class="stat-card green"><div class="sc-icon">🟢</div><div class="sc-num">${vacant}</div><div class="sc-label">Vacant</div></div>
+    <div class="stat-card red"><div class="sc-icon">🔴</div><div class="sc-num">${occupied}</div><div class="sc-label">Occupied</div></div>
+    <div class="stat-card gold"><div class="sc-icon">💰</div><div class="sc-num">₦${fmtShort(totalEarned)}</div><div class="sc-label">Total Earned</div></div>
+  </div>
+  <div class="alert alert-info">Payments are processed through NaijaRent. You receive <strong>90%</strong> directly to <strong>${currentUser.bank||'your bank'}</strong> account (${currentUser.accnum||'N/A'}). NaijaRent retains 10%.</div>`;
+  if(!myListings.length){
+    html+=emptyState('🏚️','No listings yet','Add your first property to start receiving tenant applications.')+`<div style="text-align:center;margin-top:12px"><button class="btn btn-primary" onclick="openListingModal()">+ Add Your First Listing</button></div>`;
+  } else {
+    html+=`<div class="sec-header"><h3>My Properties</h3></div><div class="cards-grid">${myListings.map(h=>houseCardHTML(h,'neutral',true)).join('')}</div>`;
+  }
+  setBody(html);
+}
+function renderMyListings(){
+  setPanelTitle('My Listings'); setHeaderActions(`<button class="btn btn-primary" onclick="openListingModal()">+ Add Listing</button>`);
+  const myListings=DB.listings.filter(h=>h.listedby===currentUser.id);
+  setBody(myListings.length?`<div class="cards-grid">${myListings.map(h=>houseCardHTML(h,'neutral',true)).join('')}</div>`:emptyState('🏚️','No listings yet','Add your first property to get started.'));
+}
+function renderApplicationsReceived(){
+  setPanelTitle('Tenant Applications'); setHeaderActions('');
+  const apps=DB.applications.filter(a=>a.landlordId===currentUser.id);
+  let html='';
+  if(!apps.length){ html=emptyState('📝','No applications yet','Applications from interested tenants will appear here.'); }
+  else {
+    html=apps.map(a=>{
+      const h=DB.listings.find(x=>x.id===a.houseId)||{};
+      const tenant=DB.users.find(u=>u.id===a.tenantId)||{};
+      return `<div class="app-card">
+        <div style="display:flex;align-items:start;justify-content:space-between;margin-bottom:10px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:44px;height:44px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:18px">${tenant.profilePic?`<img src="${tenant.profilePic}" style="width:100%;height:100%;object-fit:cover"/>`:'👤'}</div>
+            <div><div style="font-weight:700;font-size:15px">${tenant.fname||''} ${tenant.lname||''} <span style="font-size:12px;color:var(--muted)">@${tenant.username||''}</span></div>
+            <div style="color:var(--muted);font-size:13px">${tenant.jobrole||'N/A'} · ${salaryLabel(tenant.salary)}</div>
+            ${tenant.nin?`<div style="font-size:11px;color:var(--muted)">NIN: ****${tenant.nin.slice(-4)}</div>`:''}
+            </div>
+          </div>
+          <span class="app-status ${a.status}">${a.status}</span>
+        </div>
+        <div style="font-size:13px;color:var(--mid);margin-bottom:4px"><strong>Property:</strong> ${h.address||'Unknown'}</div>
+        <div style="font-size:14px;margin-bottom:12px;color:var(--mid)">"${a.message}"</div>
+        ${tenant.kinName?`<div style="font-size:12px;color:var(--muted);margin-bottom:6px">Next of Kin: ${tenant.kinName} (${tenant.kinRel}) · ${tenant.kinPhone}</div>`:''}
+        <div style="font-size:12px;color:var(--muted);margin-bottom:12px">Applied: ${a.date} · Phone: ${tenant.phone||'—'}</div>
+        ${a.status==='pending'?`<div style="display:flex;gap:8px">
+          <button class="btn btn-primary btn-sm" onclick="updateApplication('${a.id}','approved')">✅ Approve</button>
+          <button class="btn btn-danger btn-sm" onclick="updateApplication('${a.id}','rejected')">❌ Reject</button>
+          <button class="wa-btn" onclick="openChat('${tenant.id}','${h.id}')">💬 Message</button>
+        </div>`:''}
+      </div>`;
+    }).join('');
+  }
+  setBody(html);
+}
+function updateApplication(id,status){
+  const app=DB.applications.find(a=>a.id===id);
+  if(app){
+    app.status=status;
+    if(status==='approved'){
+      const h=DB.listings.find(x=>x.id===app.houseId);
+      // Mark occupied when approved
+    }
+    toast(status==='approved'?'Application approved! Tenant can now pay rent.':'Application rejected.', status==='approved'?'success':'error');
+    renderApplicationsReceived();
+  }
+}
+function renderEarnings(){
+  setPanelTitle('Earnings & Payouts'); setHeaderActions('');
+  const myTxns=DB.transactions.filter(t=>t.landlordId===currentUser.id);
+  const total=myTxns.reduce((s,t)=>s+t.landlord_recv,0);
+  const fees=myTxns.reduce((s,t)=>s+t.platform_fee,0);
+  let html=`<div class="pay-box">
+    <h4>💰 Your Earnings Summary</h4>
+    <p>All payments processed through NaijaRent and transferred to your account.</p>
+    <div class="pay-row"><span>Total Rent Received</span><span>₦${fmtN(myTxns.reduce((s,t)=>s+t.amount,0))}</span></div>
+    <div class="pay-row"><span>NaijaRent Platform Fees (10%)</span><span style="color:#f44">-₦${fmtN(fees)}</span></div>
+    <div class="pay-row"><span>Net Amount to Your Account</span><span class="pay-highlight">₦${fmtN(total)}</span></div>
+  </div>
+  <div style="background:var(--white);border-radius:12px;padding:18px;border:1px solid var(--border);margin-bottom:20px;font-size:14px">
+    <div style="font-weight:700;margin-bottom:10px">🏦 Your Payout Account</div>
+    <div style="color:var(--muted)">Bank: <strong>${currentUser.bank||'N/A'}</strong></div>
+    <div style="color:var(--muted)">Account Number: <strong>${currentUser.accnum||'N/A'}</strong></div>
+    <div style="color:var(--muted)">Account Name: <strong>${currentUser.accname||'N/A'}</strong></div>
+  </div>`;
+  if(myTxns.length){
+    html+=`<div class="table-wrap"><table>
+      <thead><tr><th>Reference</th><th>Tenant</th><th>Rent</th><th>You Received</th><th>Date</th></tr></thead>
+      <tbody>${myTxns.map(t=>{
+        const tenant=DB.users.find(u=>u.id===t.tenantId)||{};
+        return `<tr><td><span style="font-family:monospace;font-size:12px">${t.ref}</span></td><td>${tenant.fname||''} ${tenant.lname||''}</td><td>₦${fmtN(t.amount)}</td><td style="color:var(--green);font-weight:700">₦${fmtN(t.landlord_recv)}</td><td>${t.date}</td></tr>`;
+      }).join('')}</tbody></table></div>`;
+  }
+  setBody(html);
+}
+
+// ══════════ AFFILIATE DASHBOARD ══════════
+function renderAffiliateHome(){
+  setPanelTitle('NaijaRent Agent Dashboard');
+  setHeaderActions(`<button class="btn btn-affiliate" onclick="openListingModal()">+ List Vacant House</button>`);
+  const myListings=DB.listings.filter(h=>h.listedby===currentUser.id);
+  const myTxns=DB.transactions.filter(t=>t.agentId===currentUser.id);
+  const totalEarned=myTxns.reduce((s,t)=>s+(t.agent_fee||0),0);
+  const verifiedStatus=currentUser.verified?'<span class="agent-verified">✅ Verified Agent</span>':'<span class="agent-unverified">⏳ Pending Verification</span>';
+  let html=`<div class="affiliate-hero">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+      <div style="width:64px;height:64px;border-radius:50%;border:3px solid var(--gold);overflow:hidden;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">${currentUser.profilePic?`<img src="${currentUser.profilePic}" style="width:100%;height:100%;object-fit:cover"/>`:' 💰'}</div>
+      <div><div style="font-size:22px;font-weight:800">${currentUser.fname} ${currentUser.lname}</div>
+        <div style="opacity:.7;font-size:13px;margin-top:2px">@${currentUser.username} · ${verifiedStatus}</div>
+        ${currentUser.state?`<div style="opacity:.6;font-size:12px">${currentUser.lga}, ${currentUser.state}</div>`:''}
+      </div>
+    </div>
+    <h2>Your <span>Earnings</span> at a Glance</h2>
+    <p>Every house you list and gets rented earns you <strong>10%</strong> of the annual rent automatically. Start finding vacant houses today!</p>
+    <div class="earn-grid">
+      <div class="earn-item"><div class="earn-pct">${myListings.length}</div><div class="earn-lbl">Houses Listed</div></div>
+      <div class="earn-item"><div class="earn-pct">${myListings.filter(h=>h.verified).length}</div><div class="earn-lbl">Verified Listings</div></div>
+      <div class="earn-item"><div class="earn-pct">₦${fmtShort(totalEarned||0)}</div><div class="earn-lbl">Total Earned</div></div>
+      <div class="earn-item"><div class="earn-pct">10%</div><div class="earn-lbl">Your Rate</div></div>
+    </div>
+  </div>
+  ${!currentUser.verified?`<div class="alert alert-warn">⏳ Your agent account is pending admin verification. Once verified, your listings will go live and you can start earning. Check back soon!</div>`:''}
+  <div class="how-steps">
+    <div class="how-step"><div class="step-num">1</div><h4>Find Vacant Houses</h4><p>Search your city for vacant properties with landlords willing to list on NaijaRent</p></div>
+    <div class="how-step"><div class="step-num">2</div><h4>List on NaijaRent</h4><p>Upload photos, set details. 15% agent fee is applied automatically to your listings</p></div>
+    <div class="how-step"><div class="step-num">3</div><h4>Tenant Pays</h4><p>When a tenant rents the property, you earn 10% automatically transferred to your account</p></div>
+    <div class="how-step"><div class="step-num">4</div><h4>Keep Earning</div><p>Your listings continue to generate income every rent cycle. List more, earn more!</p></div>
+  </div>`;
+  if(!myListings.length){
+    html+=emptyState('🏚️','No listings yet','Find a vacant house and list it to start earning your 10% commission.')+`<div style="text-align:center;margin-top:12px"><button class="btn btn-affiliate" onclick="openListingModal()">+ List Your First House</button></div>`;
+  } else {
+    html+=`<div class="sec-header"><h3>My Listings</h3></div><div class="cards-grid">${myListings.map(h=>houseCardHTML(h,'neutral',true)).join('')}</div>`;
+  }
+  setBody(html);
+}
+
+// ══════════ ADMIN PANEL ══════════
+function renderAdminPanel(){
+  setPanelTitle('Admin Overview'); setHeaderActions('');
+  const totalTxn=DB.transactions.reduce((s,t)=>s+t.amount,0);
+  const platformRevenue=DB.transactions.reduce((s,t)=>s+t.platform_fee,0);
+  const affiliates=DB.users.filter(u=>u.role==='affiliate');
+  const pendingAgents=affiliates.filter(u=>!u.verified).length;
+  let html=`<div class="stat-cards">
+    <div class="stat-card green"><div class="sc-icon">🏘️</div><div class="sc-num">${DB.listings.length}</div><div class="sc-label">Total Listings</div></div>
+    <div class="stat-card gold"><div class="sc-icon">👥</div><div class="sc-num">${DB.users.length}</div><div class="sc-label">Registered Users</div></div>
+    <div class="stat-card purple"><div class="sc-icon">💳</div><div class="sc-num">₦${fmtShort(totalTxn)}</div><div class="sc-label">Total Transactions</div></div>
+    <div class="stat-card green"><div class="sc-icon">💎</div><div class="sc-num">₦${fmtShort(platformRevenue)}</div><div class="sc-label">NaijaRent Revenue</div></div>
+    <div class="stat-card blue"><div class="sc-icon">🤝</div><div class="sc-num">${affiliates.length}</div><div class="sc-label">Affiliate Agents</div></div>
+    <div class="stat-card red"><div class="sc-icon">⏳</div><div class="sc-num">${pendingAgents}</div><div class="sc-label">Pending Agents</div></div>
+  </div>
+  <div class="pay-box">
+    <h4>💰 Platform Revenue Account</h4><p>All platform fees are credited to NaijaRent's account.</p>
+    <div class="pay-row"><span>Account Name</span><span class="pay-highlight">${PLATFORM_ACCOUNT.name}</span></div>
+    <div class="pay-row"><span>Bank</span><span>${PLATFORM_ACCOUNT.bank}</span></div>
+    <div class="pay-row"><span>Account Number</span><span class="pay-highlight">${PLATFORM_ACCOUNT.number}</span></div>
+    <div class="pay-row"><span>Total Revenue Collected</span><span class="pay-highlight">₦${fmtN(platformRevenue)}</span></div>
+  </div>`;
+  setBody(html);
+}
+function renderAdminListings(){
+  setPanelTitle('Approve / Reject Listings'); setHeaderActions('');
+  const pending=DB.listings.filter(l=>!l.verified);
+  const verified=DB.listings.filter(l=>l.verified);
+  let html=`<div class="admin-tab-bar"><div class="admin-tab active" onclick="showAdminSection('pending')">⏳ Pending (${pending.length})</div><div class="admin-tab" onclick="showAdminSection('verified')">✅ Verified (${verified.length})</div></div>`;
+  html+=`<div id="admin-pending">${pending.length?pending.map(h=>adminListingCard(h)).join(''):emptyState('✅','All clear!','No listings pending approval.')}</div>`;
+  html+=`<div id="admin-verified" style="display:none">${verified.map(h=>adminListingCard(h,true)).join('')}</div>`;
+  setBody(html);
+}
+function showAdminSection(sec){
+  document.querySelectorAll('.admin-tab').forEach((el,i)=>el.classList.toggle('active',i===(sec==='pending'?0:1)));
+  g('admin-pending').style.display=sec==='pending'?'block':'none';
+  g('admin-verified').style.display=sec==='verified'?'block':'none';
+}
+function adminListingCard(h,isVerified=false){
+  const owner=DB.users.find(u=>u.id===h.listedby)||{};
+  return `<div class="app-card">
+    <div style="display:flex;align-items:start;justify-content:space-between;margin-bottom:8px">
+      <div><div style="font-weight:700">${h.address}</div><div style="color:var(--muted);font-size:13px">${h.city} · ${HOUSE_TYPE_LABELS[h.type]||''} · ₦${fmtN(h.rent)}/yr</div></div>
+      <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">
+        <span class="app-status ${isVerified?'approved':'pending'}">${isVerified?'verified':'pending'}</span>
+        <span class="${h.occupied?'status-occupied':'status-vacant'}">${h.occupied?'Occupied':'Vacant'}</span>
+      </div>
+    </div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:10px">${h.desc}</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Listed by: ${owner.fname||''} ${owner.lname||''} (@${owner.username||''}) (${owner.role||''}) · ${owner.phone||''}</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      ${!isVerified?`<button class="btn btn-primary btn-sm" onclick="adminVerify('${h.id}',true)">✅ Approve</button><button class="btn btn-danger btn-sm" onclick="adminVerify('${h.id}',false)">❌ Reject</button>`:
+      `<button class="btn btn-danger btn-sm" onclick="adminVerify('${h.id}',false)">🚫 Revoke</button>`}
+      <button class="btn btn-ghost btn-sm" onclick="toggleOccupied('${h.id}')">${h.occupied?'🟢 Mark Vacant':'🔴 Mark Occupied'}</button>
+    </div>
+  </div>`;
+}
+function adminVerify(id,approve){
+  const h=DB.listings.find(x=>x.id===id);
+  if(h){ h.verified=approve; toast(approve?'Listing approved and published!':'Listing rejected.', approve?'success':'error'); renderAdminListings(); updateStats(); }
+}
+function toggleOccupied(id){
+  const h=DB.listings.find(x=>x.id===id);
+  if(h){ h.occupied=!h.occupied; toast(`Listing marked as ${h.occupied?'Occupied':'Vacant'}`, 'success'); renderAdminListings(); }
+}
+function renderAdminUsers(){
+  setPanelTitle('All Users'); setHeaderActions('');
+  const nonAdmins=DB.users.filter(u=>u.role!=='admin');
+  let html=`<div class="table-wrap"><table>
+    <thead><tr><th>Name</th><th>Username</th><th>Role</th><th>Phone</th><th>NIN</th><th>Details</th></tr></thead>
+    <tbody>${nonAdmins.map(u=>`
+      <tr><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:14px">${u.profilePic?`<img src="${u.profilePic}" style="width:100%;height:100%;object-fit:cover"/>`:'👤'}</div> ${u.fname} ${u.lname}</div></td>
+      <td style="font-family:monospace;font-size:13px">@${u.username||'—'}</td>
+      <td><span class="chip ${u.role==='affiliate'?'chip-gold':u.role==='agent'?'chip-blue':''}">${u.role==='affiliate'?'NR Agent':u.role}</span></td>
+      <td>${u.phone}</td>
+      <td style="font-size:12px">${u.nin?'****'+u.nin.slice(-4):'—'}</td>
+      <td style="font-size:12px;color:var(--muted)">${u.role==='tenant'?salaryLabel(u.salary)+' · '+u.area:u.role==='affiliate'?u.state+', '+u.lga:u.bank+' · '+u.accnum}</td></tr>`).join('')}
+    </tbody></table></div>`;
+  setBody(html);
+}
+function renderAdminTransactions(){
+  setPanelTitle('All Transactions'); setHeaderActions('');
+  const platformRevenue=DB.transactions.reduce((s,t)=>s+t.platform_fee,0);
+  let html=`<div class="advisor-box" style="margin-bottom:24px">
+    <h3>💎 Platform Revenue</h3><p>NaijaRent earns platform fees on every transaction</p>
+    <div class="budget-grid">
+      <div class="budget-item"><div class="bi-label">Total Transactions</div><div class="bi-val">${DB.transactions.length}</div></div>
+      <div class="budget-item"><div class="bi-label">Total Volume</div><div class="bi-val">₦${fmtN(DB.transactions.reduce((s,t)=>s+t.amount,0))}</div></div>
+      <div class="budget-item"><div class="bi-label">NaijaRent Revenue</div><div class="bi-val">₦${fmtN(platformRevenue)}</div></div>
+    </div></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Reference</th><th>Tenant</th><th>Landlord</th><th>Amount</th><th>Platform Fee</th><th>Agent Fee</th><th>Landlord Gets</th><th>Date</th></tr></thead>
+    <tbody>${DB.transactions.map(t=>{
+      const tenant=DB.users.find(u=>u.id===t.tenantId)||{};
+      const landlord=DB.users.find(u=>u.id===t.landlordId)||{};
+      return `<tr><td><span style="font-family:monospace;font-size:11px">${t.ref}</span></td><td>${tenant.fname||''} ${tenant.lname||''}</td><td>${landlord.fname||''} ${landlord.lname||''}</td><td>₦${fmtN(t.amount)}</td><td style="color:var(--gold)">₦${fmtN(t.platform_fee)}</td><td style="color:var(--blue)">₦${fmtN(t.agent_fee||0)}</td><td style="color:var(--green)">₦${fmtN(t.landlord_recv)}</td><td>${t.date}</td></tr>`;
+    }).join('')}</tbody></table></div>`;
+  setBody(html);
+}
+function renderAdminAgents(){
+  setPanelTitle('Affiliate Agent Applications'); setHeaderActions('');
+  const affiliates=DB.users.filter(u=>u.role==='affiliate');
+  if(!affiliates.length){ setBody(emptyState('🤝','No agent applications yet','Applications will appear here when people register as NaijaRent agents.')); return; }
+  const html=affiliates.map(u=>`
+    <div class="app-card">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">
+        <div class="profile-pic-large">${u.profilePic?`<img src="${u.profilePic}" style="width:100%;height:100%;object-fit:cover"/>`:'💰'}</div>
+        <div>
+          <div style="font-size:18px;font-weight:700">${u.fname} ${u.lname} <span style="font-size:13px;color:var(--muted)">@${u.username}</span></div>
+          <div>${u.verified?'<span class="agent-verified">✅ Verified Agent</span>':'<span class="agent-unverified">⏳ Pending Verification</span>'}</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;font-size:13px">
+        <div><strong>Phone:</strong> ${u.phone}</div>
+        <div><strong>Email:</strong> ${u.email}</div>
+        <div><strong>NIN:</strong> ****${(u.nin||'').slice(-4)}</div>
+        <div><strong>DOB:</strong> ${u.dob||'—'}</div>
+        <div><strong>State:</strong> ${u.state||'—'}</div>
+        <div><strong>LGA:</strong> ${u.lga||'—'}</div>
+        <div><strong>Bank:</strong> ${u.bank} · ${u.accnum}</div>
+        <div><strong>Workplace:</strong> ${u.workplace||'—'}</div>
+      </div>
+      <div style="display:flex;gap:8px">
+        ${!u.verified?`<button class="btn btn-primary btn-sm" onclick="verifyAgent('${u.id}',true)">✅ Verify Agent</button><button class="btn btn-danger btn-sm" onclick="verifyAgent('${u.id}',false)">❌ Reject</button>`:'<span style="color:var(--green);font-weight:600">✅ Already Verified</span>'}
+      </div>
+    </div>`).join('');
+  setBody(html);
+}
+function verifyAgent(id,approve){
+  const u=DB.users.find(x=>x.id===id);
+  if(u){ u.verified=approve; toast(approve?`${u.fname} verified as NaijaRent Agent!`:`${u.fname}'s application rejected.`, approve?'success':'error'); renderAdminAgents(); }
+}
+
+// ══════════ PROFILE ══════════
+function renderProfile(){
+  setPanelTitle('My Profile'); setHeaderActions('');
+  const u=currentUser;
+  let html=`<div style="max-width:580px">
+    <div style="background:var(--white);border-radius:14px;padding:28px;border:1px solid var(--border);margin-bottom:20px">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px">
+        <div class="profile-pic-large">${u.profilePic?`<img src="${u.profilePic}" style="width:100%;height:100%;object-fit:cover"/>`:u.role==='tenant'?'👤':u.role==='landlord'?'🏡':u.role==='affiliate'?'💰':'🤝'}</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700">${u.fname} ${u.lname}</div>
+          <div style="font-size:13px;color:var(--muted)">@${u.username}</div>
+          <span class="chip ${u.role==='affiliate'?'chip-gold':''}" style="margin-top:6px;display:inline-block">${u.role==='affiliate'?'NaijaRent Agent':u.role}</span>
+          ${u.role==='affiliate'?(u.verified?'<span class="agent-verified" style="margin-left:6px">✅ Verified</span>':'<span class="agent-unverified" style="margin-left:6px">Pending Verification</span>'):''}
+        </div>
+      </div>
+      <div style="margin-bottom:18px">
+        <label style="display:block;font-size:13px;font-weight:600;color:var(--mid);margin-bottom:8px">Update Profile Picture</label>
+        <div class="profile-upload-area" id="profile-pic-update-area" onclick="triggerPicUpload('profile-pic-update-input')">
+          <input type="file" id="profile-pic-update-input" accept="image/*" onchange="updateProfilePic(this)"/>
+          <span style="font-size:13px;color:var(--muted)">📷 Click to upload new profile picture</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div><div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">PHONE</div><div>${u.phone}</div></div>
+        <div><div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">EMAIL</div><div>${u.email||'Not provided'}</div></div>
+        ${u.nin?`<div style="grid-column:1/-1"><div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">NIN</div><div>****${u.nin.slice(-4)} (verified)</div></div>`:''}
+        ${u.role==='tenant'?`
+        <div><div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">EMPLOYMENT</div><div>${u.employment||'—'}</div></div>
+        <div><div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">JOB ROLE</div><div>${u.jobrole||'—'}</div></div>
+        <div><div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">INCOME</div><div>${salaryLabel(u.salary)}</div></div>
+        <div><div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">PREFERRED AREA</div><div>${u.area||'—'}</div></div>
+        `:''}
+        ${u.role==='affiliate'?`
+        <div><div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">STATE</div><div>${u.state||'—'}</div></div>
+        <div><div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">LGA</div><div>${u.lga||'—'}</div></div>
+        <div><div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">WORKPLACE</div><div>${u.workplace||'—'}</div></div>
+        `:''}
+        ${(u.role==='landlord'||u.role==='agent'||u.role==='affiliate')?`
+        <div><div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">BANK</div><div>${u.bank||'—'} · ${u.accnum||'—'}</div></div>
+        <div><div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">ACCOUNT NAME</div><div>${u.accname||'—'}</div></div>`:''}
+      </div>
+      ${u.role==='tenant'&&u.kinName?`
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
+        <div style="font-size:14px;font-weight:700;margin-bottom:10px">Next of Kin</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px">
+          <div><div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">NAME</div><div>${u.kinName}</div></div>
+          <div><div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">RELATIONSHIP</div><div>${u.kinRel||'—'}</div></div>
+          <div><div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">PHONE</div><div>${u.kinPhone}</div></div>
+          <div><div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">ADDRESS</div><div>${u.kinAddr||'—'}</div></div>
+        </div>
+      </div>`:''}
+    </div></div>`;
+  setBody(html);
+}
+
+// ══════════ HOUSE CARD ══════════
+function houseCardHTML(h,tier='neutral',isOwner=false){
+  const owner=DB.users.find(u=>u.id===h.listedby)||{};
+  const saved=(currentUser&&currentUser.saved||[]).includes(h.id);
+  const avgRating=getAvgRating(h.id);
+  const starsHtml=avgRating?'⭐'.repeat(Math.round(avgRating))+` <span style="font-size:12px;color:var(--muted)">(${getReviewCount(h.id)})</span>`:'<span style="font-size:12px;color:var(--muted)">No reviews</span>';
+  const isAffiliateListing=owner.role==='affiliate';
+  const agentFeeLabel=isAffiliateListing?`<span style="font-size:11px;color:var(--gold)">💰 NaijaRent Agent (15% fee)</span>`:h.agentfee>0?`<span style="font-size:11px;color:var(--muted)">Agent: ${h.agentfee}%</span>`:'';
+  // Media thumbnail
+  const mediaThumb=h.media&&h.media.length?`<img src="${h.media[0]}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/>`:'';
+  let scoreBar='';
+  if(tier!=='neutral'&&h.final!==undefined){
+    const bc=tier==='affordable'?'':tier==='stretch'?'stretch':'aspirational';
+    scoreBar=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div class="score-bar" style="flex:1"><div class="score-fill ${bc}" style="width:${h.final}%"></div></div><span style="font-size:12px;color:var(--muted);min-width:40px">${h.final}/100</span></div>`;
+  }
+  const actionBtns=isOwner
+    ?`<button class="btn btn-ghost btn-sm" onclick="toggleOccupiedFromCard('${h.id}')">${h.occupied?'🟢 Vacant':'🔴 Occupied'}</button>
+       <button class="btn btn-danger btn-sm" onclick="deleteListing('${h.id}')">🗑 Remove</button>`
+    :currentUser&&currentUser.role==='tenant'
+      ?`<button class="btn btn-primary btn-sm" onclick="viewHouse('${h.id}')">View Details</button>
+        <button class="btn btn-ghost btn-sm" data-saveid="${h.id}" onclick="toggleSave('${h.id}')">${saved?'❤️':'🤍'}</button>`
+      :`<button class="btn btn-ghost btn-sm" onclick="viewHouse('${h.id}')">View</button>`;
+  return `<div class="house-card">
+    <div class="house-img">${mediaThumb}<div class="house-img-overlay"></div>
+      <span class="badge ${h.occupied?'badge-occupied':'badge-vacant'}">${h.occupied?'Occupied':'Vacant'}</span>
+      ${h.verified?'<span class="verified-badge">✅ Verified</span>':''}
+    </div>
+    <div class="house-body">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <span class="house-type-tag">${HOUSE_TYPE_LABELS[h.type]||''}</span>
+        ${isAffiliateListing?'<span style="font-size:10px;font-weight:700;color:var(--gold);background:rgba(232,160,32,.1);border-radius:4px;padding:2px 6px">NR AGENT</span>':''}
+      </div>
+      ${scoreBar}
+      <div class="house-title">${h.address}</div>
+      <div class="house-area">📍 ${h.city} · ${h.rooms} bed · ${h.toilets} bath</div>
+      ${agentFeeLabel}
+      <div class="house-price">₦${fmtN(h.rent)}<span>/year</span></div>
+      <div style="font-size:13px;color:var(--muted);margin-top:-8px;margin-bottom:8px">≈ <strong style="color:var(--mid)">₦${fmtN(Math.round(h.rent/12))}</strong>/month</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:10px">${starsHtml}</div>
+      <div class="house-amenities">
+        ${h.pop?'<span class="amenity">🎨 POP</span>':''}${h.parking?'<span class="amenity">🚗 Parking</span>':''}
+        ${h.fenced?'<span class="amenity">🧱 Fenced</span>':''}${h.water?'<span class="amenity">💧 Water</span>':''}
+        ${h.gen?'<span class="amenity">⚡ Prepaid</span>':''}${h.borehole?'<span class="amenity">🔩 Borehole</span>':''}
+      </div>
+      <div class="house-footer">${actionBtns}</div>
+    </div>
+  </div>`;
+}
+
+function toggleOccupiedFromCard(id){
+  const h=DB.listings.find(x=>x.id===id);
+  if(h){ h.occupied=!h.occupied; toast(`Marked as ${h.occupied?'Occupied 🔴':'Vacant 🟢'}`, 'success');
+    if(currentUser.role==='landlord'||currentUser.role==='agent') renderMyListings();
+    else if(currentUser.role==='affiliate') renderAffiliateHome();
+  }
+}
+
+// ══════════ VIEW HOUSE MODAL ══════════
+function viewHouse(houseId){
+  const h=DB.listings.find(x=>x.id===houseId); if(!h) return;
+  const owner=DB.users.find(u=>u.id===h.listedby)||{};
+  const reviews=DB.reviews.filter(r=>r.houseId===houseId);
+  const agentFeeAmt=h.agentfee>0?Math.round(h.rent*h.agentfee/100):0;
+  const isAffiliateOwner=owner.role==='affiliate';
+  const actualAgentFee=isAffiliateOwner?AFFILIATE_AGENT_FEE:h.agentfee;
+  const actualAgentFeeAmt=isAffiliateOwner?Math.round(h.rent*AFFILIATE_AGENT_FEE/100):agentFeeAmt;
+  const mediaSection=h.media&&h.media.length?`
+    <div class="media-gallery" style="margin-bottom:16px">${h.media.map(m=>`
+      <div class="media-thumb">${m.type==='video'?`<video src="${m.url}" style="width:100%;height:100%;object-fit:cover"/>`:
+      `<img src="${m.url}" style="width:100%;height:100%;object-fit:cover"/>`}
+      <div class="media-overlay">👁️</div></div>`).join('')}</div>`:
+    `<div style="height:120px;background:linear-gradient(135deg,var(--green),var(--green-light));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:48px;margin-bottom:16px">🏠</div>`;
+  g('modal-view-content').innerHTML=`
+    ${mediaSection}
+    <div style="display:flex;align-items:start;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <div>
+        <span class="house-type-tag">${HOUSE_TYPE_LABELS[h.type]||''}</span>
+        <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-top:6px">${h.address}</div>
+        <div style="color:var(--muted);font-size:14px">📍 ${h.city} · ${h.rooms} bedroom(s) · ${h.toilets} toilet(s)</div>
+      </div>
+      <span class="${h.occupied?'status-occupied':'status-vacant'}" style="font-size:13px;padding:6px 12px">${h.occupied?'🔴 Occupied':'🟢 Vacant'}</span>
+    </div>
+    <div style="margin-bottom:16px">
+      <div style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--green)">₦${fmtN(h.rent)}<span style="font-size:14px;font-weight:400;color:var(--muted)">/year</span></div>
+      <div style="font-size:14px;color:var(--muted);margin-top:2px">≈ <strong style="color:var(--mid)">₦${fmtN(Math.round(h.rent/12))}</strong> per month</div>
+    </div>
+    <div style="background:var(--light);border-radius:10px;padding:14px;margin-bottom:14px;font-size:14px">
+      <div style="font-weight:700;margin-bottom:8px">💰 Total Move-in Cost</div>
+      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border)"><span>Annual Rent</span><span>₦${fmtN(h.rent)}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);color:var(--muted);font-size:13px"><span>↳ Monthly equivalent</span><span>₦${fmtN(Math.round(h.rent/12))}/mo</span></div>
+      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border)"><span>Agreement Fee</span><span>₦${fmtN(h.agree||0)}</span></div>
+      ${actualAgentFeeAmt?`<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border)"><span>Agent Fee (${actualAgentFee}%)</span><span>₦${fmtN(actualAgentFeeAmt)}</span></div>`:''}
+      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border)"><span>NaijaRent Platform Fee (5%)</span><span>₦${fmtN(Math.round(h.rent*5/100))}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:6px 0;font-weight:700;font-size:15px"><span>TOTAL</span><span style="color:var(--green)">₦${fmtN(h.rent+(h.agree||0)+actualAgentFeeAmt+Math.round(h.rent*5/100))}</span></div>
+    </div>
+    <p style="font-size:14px;color:var(--mid);margin-bottom:16px">${h.desc}</p>
+    <div style="margin-bottom:14px"><strong>Nearest bus stop:</strong> ${h.busstop||'Not specified'}</div>
+    <div class="house-amenities" style="margin-bottom:16px">
+      ${h.pop?'<span class="amenity">🎨 POP Ceiling</span>':''}${h.parking?'<span class="amenity">🚗 Parking</span>':''}
+      ${h.fenced?'<span class="amenity">🧱 Fenced</span>':''}${h.water?'<span class="amenity">💧 Running Water</span>':''}
+      ${h.gen?'<span class="amenity">⚡ Prepaid Meter</span>':''}${h.borehole?'<span class="amenity">🔩 Borehole</span>':''}
+    </div>
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:16px">
+      <div style="font-weight:700;margin-bottom:8px">Listed By</div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;overflow:hidden">${owner.profilePic?`<img src="${owner.profilePic}" style="width:100%;height:100%;object-fit:cover"/>`:owner.role==='landlord'?'🏡':'🤝'}</div>
+        <div><div style="font-weight:600">${owner.fname||'—'} ${owner.lname||''}</div>
+          <div style="font-size:12px;color:var(--muted)">${owner.role==='affiliate'?'NaijaRent Agent':owner.role} ${isAffiliateOwner?'<span style="color:var(--gold)">💰</span>':''}</div>
+        </div>
+      </div>
+    </div>
+    ${reviews.length?`<div style="margin-bottom:14px"><div style="font-weight:700;margin-bottom:10px">⭐ Reviews (${reviews.length})</div>${reviews.map(r=>{const t=DB.users.find(u=>u.id===r.tenantId)||{};return `<div style="background:var(--light);border-radius:8px;padding:12px;margin-bottom:8px"><div style="font-weight:600;font-size:13px">${t.fname||''} ${t.lname||''} · ${'⭐'.repeat(r.rating)}</div><div style="font-size:13px;color:var(--mid);margin-top:4px">${r.comment}</div></div>`}).join('')}</div>`:''}
+    ${currentUser&&currentUser.role==='tenant'&&!h.occupied?`
+    <div class="modal-footer" style="padding-top:0">
+      <button class="btn btn-primary" onclick="openApplyModal('${h.id}')">📝 Apply Now</button>
+      <button class="btn btn-gold" onclick="openPayModal('${h.id}')">💳 Pay Rent</button>
+      <button class="btn btn-ghost" onclick="openReviewModal('${h.id}')">⭐ Review</button>
+      <button class="wa-btn" onclick="openChat('${owner.id}','${h.id}')">💬 Message</button>
+    </div>`:currentUser&&currentUser.role==='tenant'&&h.occupied?`<div class="alert alert-warn">This property is currently occupied. Keep checking back for when it becomes vacant.</div>`:''}`;
+  g('modal-view').classList.add('open');
+}
+
+// ══════════ PAYMENT MODAL ══════════
+function openPayModal(houseId){
+  const h=DB.listings.find(x=>x.id===houseId); if(!h) return;
+  const owner=DB.users.find(u=>u.id===h.listedby)||{};
+  const isAff=owner.role==='affiliate';
+  const agentFee=isAff?AFFILIATE_AGENT_FEE:h.agentfee;
+  const agentFeeAmt=agentFee>0?Math.round(h.rent*agentFee/100):0;
+  const platformFee=Math.round((h.rent+(h.agree||0))*PLATFORM_FEE_PCT/100);
+  const total=h.rent+(h.agree||0)+agentFeeAmt;
+  const landlordRecv=total-platformFee-agentFeeAmt;
+  const agentRecv=isAff?Math.round(h.rent*AFFILIATE_AGENT_EARN/100):agentFeeAmt;
+  const nrFromAff=isAff?Math.round(h.rent*(AFFILIATE_PLATFORM_FEE)/100):0;
+  g('modal-pay-content').innerHTML=`
+    <div class="pay-box">
+      <h4>🏠 ${h.address}</h4>
+      <p>${HOUSE_TYPE_LABELS[h.type]||''} · ${h.city} · ${h.occupied?'⚠️ Occupied':'🟢 Vacant'}</p>
+      <div class="pay-row"><span>Annual Rent</span><span>₦${fmtN(h.rent)}</span></div>
+      <div class="pay-row"><span>Agreement/Caution Fee</span><span>₦${fmtN(h.agree||0)}</span></div>
+      ${agentFeeAmt?`<div class="pay-row"><span>Agent Fee (${agentFee}%)${isAff?' — NaijaRent Agent':''}</span><span>₦${fmtN(agentFeeAmt)}</span></div>`:''}
+      <div class="pay-row"><span>NaijaRent Platform Fee (${isAff?AFFILIATE_PLATFORM_FEE:PLATFORM_FEE_PCT}%)</span><span style="color:#f8c94a">₦${fmtN(isAff?nrFromAff:platformFee)}</span></div>
+      <div class="pay-row"><span>TOTAL TO PAY</span><span class="pay-highlight">₦${fmtN(total)}</span></div>
+    </div>
+    <div class="commission-badge">
+      💡 Breakdown: <strong>₦${fmtN(landlordRecv)}</strong> → ${owner.fname} (Landlord) · 
+      ${isAff?`<strong>₦${fmtN(agentRecv)}</strong> → ${owner.fname} (Agent, 10%) · <strong>₦${fmtN(nrFromAff)}</strong> → NaijaRent (5%)`:
+      `<strong>₦${fmtN(platformFee)}</strong> → NaijaRent`}
+    </div>
+    <div style="font-weight:700;margin-bottom:14px">Select Payment Method</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
+      <div onclick="selectPayMethod(this,'transfer')" style="border:2px solid var(--border);border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:all .2s" id="pm-transfer">
+        <div style="font-size:24px;margin-bottom:6px">🏦</div><div style="font-weight:600;font-size:13px">Bank Transfer</div><div style="font-size:11px;color:var(--muted)">Pay via USSD/Transfer</div>
+      </div>
+      <div onclick="selectPayMethod(this,'card')" style="border:2px solid var(--border);border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:all .2s" id="pm-card">
+        <div style="font-size:24px;margin-bottom:6px">💳</div><div style="font-weight:600;font-size:13px">Debit Card</div><div style="font-size:11px;color:var(--muted)">Visa / Mastercard / Verve</div>
+      </div>
+    </div>
+    <div id="pay-details" style="display:none;margin-bottom:16px"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-dark" onclick="closeModal('modal-pay')">Cancel</button>
+      <button class="btn btn-gold" onclick="processPayment('${houseId}','${owner.id}',${total},${isAff?nrFromAff:platformFee},${landlordRecv},${isAff?agentRecv:0},'${isAff?owner.id:''}')">✅ Confirm Payment</button>
+    </div>`;
+  g('modal-pay').classList.add('open');
+}
+function selectPayMethod(el,method){
+  document.querySelectorAll('#modal-pay [id^=pm-]').forEach(x=>x.style.borderColor='var(--border)');
+  el.style.borderColor='var(--green)';
+  const d=g('pay-details'); d.style.display='block';
+  if(method==='transfer'){
+    d.innerHTML=`<div style="background:var(--green-pale);border-radius:10px;padding:16px;font-size:14px">
+      <div style="font-weight:700;margin-bottom:8px">🏦 Bank Transfer Details</div>
+      <div>Bank: <strong>GTBank</strong></div><div>Account: <strong>0235949599</strong></div>
+      <div>Name: <strong>Olanrewaju Joseph Sunday</strong> (NaijaRent)</div>
+      <div style="margin-top:8px;font-size:12px;color:var(--muted)">Use your NaijaRent reference as narration. Disbursement within 24hrs.</div>
+    </div>`;
+  } else {
+    d.innerHTML=`<div style="background:var(--light);border-radius:10px;padding:16px">
+      <div class="form-group" style="margin-bottom:12px"><label>Card Number</label><input type="text" placeholder="0000 0000 0000 0000" maxlength="19"/></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="form-group" style="margin-bottom:0"><label>Expiry</label><input type="text" placeholder="MM/YY" maxlength="5"/></div>
+        <div class="form-group" style="margin-bottom:0"><label>CVV</label><input type="password" placeholder="***" maxlength="3"/></div>
+      </div></div>`;
+  }
+}
+function processPayment(houseId,landlordId,amount,platformFee,landlordRecv,agentFee,agentId){
+  const ref='NJR-'+new Date().getFullYear()+'-'+String(++DB.nextTxnId).padStart(3,'0');
+  const h=DB.listings.find(x=>x.id===houseId);
+  const txn={id:'t'+DB.nextTxnId,houseId,tenantId:currentUser.id,landlordId,amount,platform_fee:platformFee,landlord_recv:landlordRecv,agent_fee:agentFee||0,agentId:agentId||null,date:new Date().toISOString().split('T')[0],status:'completed',ref};
+  DB.transactions.push(txn);
+  if(h) h.occupied=true; // Mark as occupied when paid
+  updateStats();
+  closeModal('modal-pay');
+  toast(`Payment successful! Ref: ${ref} 🎉 Property now marked as Occupied.`,'success');
+}
+
+// ══════════ REVIEW MODAL ══════════
+function openReviewModal(houseId){
+  g('modal-review-content').innerHTML=`
+    <p style="color:var(--muted);font-size:14px;margin-bottom:16px">Share your experience to help other tenants.</p>
+    <div style="margin-bottom:16px"><div style="font-weight:600;margin-bottom:8px">Your Rating</div>
+      <div class="star-input" id="star-input">${[1,2,3,4,5].map(i=>`<span onclick="setStars(${i})" id="star-${i}">★</span>`).join('')}</div>
+    </div>
+    <div class="form-group"><label>Your Review</label><textarea id="rev-text" placeholder="Describe the property, landlord attitude, neighbourhood..."></textarea></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-dark" onclick="closeModal('modal-review')">Cancel</button>
+      <button class="btn btn-gold" onclick="submitReview('${houseId}')">Submit Review ⭐</button>
+    </div>`;
+  g('modal-review').classList.add('open');
+}
+let selectedStars=0;
+function setStars(n){ selectedStars=n; [1,2,3,4,5].forEach(i=>{ const el=g('star-'+i); if(el) el.style.color=i<=n?'#e8a020':'#ccc'; }); }
+function submitReview(houseId){
+  if(!selectedStars){toast('Please select a star rating','error');return}
+  const comment=g('rev-text')?.value?.trim();
+  if(!comment){toast('Please write a review comment','error');return}
+  DB.reviews.push({id:'r'+(++DB.nextRevId),houseId,tenantId:currentUser.id,rating:selectedStars,comment,date:new Date().toISOString().split('T')[0]});
+  selectedStars=0; closeModal('modal-review'); toast('Review submitted! Thank you 🙏','success');
+}
+function getAvgRating(houseId){ const r=DB.reviews.filter(x=>x.houseId===houseId); return r.length?Math.round((r.reduce((s,x)=>s+x.rating,0)/r.length)*10)/10:0; }
+function getReviewCount(houseId){ return DB.reviews.filter(x=>x.houseId===houseId).length; }
+
+// ══════════ APPLY MODAL ══════════
+function openApplyModal(houseId){
+  const h=DB.listings.find(x=>x.id===houseId); if(!h) return;
+  const existing=DB.applications.find(a=>a.houseId===houseId&&a.tenantId===currentUser.id);
+  if(existing){toast('You have already applied for this property','error');return}
+  g('modal-apply-content').innerHTML=`
+    <p style="color:var(--muted);font-size:14px;margin-bottom:16px">Applying for: <strong>${h.address}</strong> (₦${fmtN(h.rent)}/yr)</p>
+    <div class="form-group"><label>Introduction / Cover Message *</label><textarea id="apply-msg" placeholder="Introduce yourself — occupation, why you want this property, references..."></textarea></div>
+    <div class="alert alert-info" style="font-size:13px">Your profile info (name, salary, employment, NIN last 4) will be sent to the landlord for review.</div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-dark" onclick="closeModal('modal-apply')">Cancel</button>
+      <button class="btn btn-primary" onclick="submitApplication('${houseId}')">Submit Application →</button>
+    </div>`;
+  g('modal-apply').classList.add('open');
+}
+function submitApplication(houseId){
+  const msg=g('apply-msg')?.value?.trim();
+  if(!msg){toast('Please write an introduction message','error');return}
+  const h=DB.listings.find(x=>x.id===houseId);
+  const app={id:'a'+(++DB.nextAppId),houseId,tenantId:currentUser.id,landlordId:h.listedby,status:'pending',message:msg,date:new Date().toISOString().split('T')[0]};
+  DB.applications.push(app);
+  closeModal('modal-apply'); closeModal('modal-view');
+  toast('Application submitted! The landlord will review it soon.','success');
+}
+
+// ══════════ CHAT ══════════
+function openChat(partnerId,houseId){
+  const partner=DB.users.find(u=>u.id===partnerId)||{};
+  const h=DB.listings.find(x=>x.id===houseId)||{};
+  currentChatPartner=partnerId; currentChatHouseId=houseId;
+  const myMsgs=DB.messages.filter(m=>(m.from===currentUser.id&&m.to===partnerId)||(m.from===partnerId&&m.to===currentUser.id));
+  g('modal-msg-content').innerHTML=`
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border)">
+      <div style="width:40px;height:40px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:18px;overflow:hidden">${partner.profilePic?`<img src="${partner.profilePic}" style="width:100%;height:100%;object-fit:cover"/>`:partner.role==='landlord'?'🏡':'🤝'}</div>
+      <div><div style="font-weight:700">${partner.fname||'Unknown'} ${partner.lname||''} <span style="font-size:12px;color:var(--muted)">@${partner.username||''}</span></div><div style="font-size:12px;color:var(--muted)">Re: ${h.address||'—'}</div></div>
+    </div>
+    <div class="messages-box" id="msg-box">${myMsgs.map(m=>`
+      <div class="msg ${m.from===currentUser.id?'sent':'recv'}"><div>${m.text}</div><div class="msg-time">${m.time}</div></div>`).join('')}</div>
+    <div class="msg-input-row">
+      <input id="msg-input" placeholder="Type your message..." onkeypress="if(event.key==='Enter')sendMsg()"/>
+      <button class="btn btn-primary" onclick="sendMsg()">Send</button>
+    </div>`;
+  g('modal-msg').classList.add('open');
+  const box=g('msg-box'); if(box) box.scrollTop=box.scrollHeight;
+}
+function sendMsg(){
+  const text=g('msg-input')?.value?.trim(); if(!text) return;
+  const now=new Date(); const time=now.getHours()+':'+(now.getMinutes()<10?'0':'')+now.getMinutes()+' '+(now.getHours()<12?'AM':'PM');
+  const msg={id:'m'+(++DB.nextMsgId),from:currentUser.id,to:currentChatPartner,houseId:currentChatHouseId,text,time,date:new Date().toISOString().split('T')[0]};
+  DB.messages.push(msg);
+  const box=g('msg-box');
+  if(box){ box.innerHTML+=`<div class="msg sent"><div>${text}</div><div class="msg-time">${time}</div></div>`; box.scrollTop=box.scrollHeight; }
+  g('msg-input').value='';
+  setTimeout(()=>{
+    const replies=['Thank you for your message. I will get back to you shortly.','The property is still available. When would you like to inspect?','Please send me your details so I can process your application.','I will check and confirm the availability of the property.'];
+    const reply={id:'m'+(++DB.nextMsgId),from:currentChatPartner,to:currentUser.id,houseId:currentChatHouseId,text:replies[Math.floor(Math.random()*replies.length)],time,date:new Date().toISOString().split('T')[0]};
+    DB.messages.push(reply);
+    if(box){ box.innerHTML+=`<div class="msg recv"><div>${reply.text}</div><div class="msg-time">${reply.time}</div></div>`; box.scrollTop=box.scrollHeight; }
+  },1200);
+}
+
+// ══════════ LISTING CRUD ══════════
+function openListingModal(){
+  const isAff=currentUser.role==='affiliate';
+  g('agent-fee-group').style.display=(currentUser.role==='agent')?'block':'none';
+  g('affiliate-fee-notice').style.display=isAff?'block':'none';
+  if(isAff){ const sel=g('l-agentfee'); if(sel){ sel.value='15'; } }
+  listingMedia=[];
+  g('media-preview-grid').innerHTML='';
+  g('modal-listing').classList.add('open');
+}
+function submitListing(){
+  const address=v('l-address'),city=v('l-city'),type=v('l-type'),desc=v('l-desc');
+  const rooms=parseInt(v('l-rooms')),toilets=parseInt(v('l-toilets')),rent=parseInt(v('l-rent'));
+  if(!address||!city||!type||!desc||!rooms||!toilets||!rent){toast('Please fill all required fields (*)','error');return}
+  const isAff=currentUser.role==='affiliate';
+  const agentfee=isAff?AFFILIATE_AGENT_FEE:(currentUser.role==='agent'?parseInt(v('l-agentfee'))||0:0);
+  const listing={id:'h'+(++DB.nextListingId),address,city,type,desc,rooms,toilets,busstop:v('l-busstop'),
+    pop:g('l-pop').checked,parking:g('l-parking').checked,fenced:g('l-fenced').checked,
+    water:g('l-water').checked,gen:g('l-gen').checked,borehole:g('l-borehole').checked,
+    rent,agree:parseInt(v('l-agree'))||0,agentfee,listedby:currentUser.id,verified:false,occupied:false,
+    media:listingMedia.map(m=>({url:m.url,type:m.type}))};
+  DB.listings.push(listing);
+  updateStats(); closeModal('modal-listing');
+  toast('Listing submitted for admin approval! 🎉','success');
+  ['l-address','l-desc','l-rooms','l-toilets','l-busstop','l-rent','l-agree'].forEach(id=>{const el=g(id);if(el)el.value='';});
+  ['l-city','l-type'].forEach(id=>{const el=g(id);if(el)el.value='';});
+  ['l-pop','l-parking','l-fenced','l-water','l-gen','l-borehole'].forEach(id=>{const el=g(id);if(el)el.checked=false;});
+  listingMedia=[];
+  if(currentUser.role==='landlord'||currentUser.role==='agent') renderLandlordHome();
+  else if(currentUser.role==='affiliate') renderAffiliateHome();
+}
+function deleteListing(id){ const i=DB.listings.findIndex(h=>h.id===id); if(i!==-1)DB.listings.splice(i,1); toast('Listing removed','success'); renderMyListings(); }
+function toggleSave(id){
+  if(!currentUser.saved)currentUser.saved=[];
+  const idx=currentUser.saved.indexOf(id);
+  if(idx===-1){currentUser.saved.push(id);toast('Saved! ❤️','success');}
+  else{currentUser.saved.splice(idx,1);toast('Removed from saved','success');}
+  document.querySelectorAll(`[data-saveid="${id}"]`).forEach(btn=>btn.textContent=currentUser.saved.includes(id)?'❤️':'🤍');
+}
+
+// ══════════ MEDIA UPLOAD ══════════
+function handleMediaUpload(input){
+  const files=Array.from(input.files);
+  if(!files.length) return;
+  files.forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=e=>{
+      const url=e.target.result;
+      const isVideo=file.type.startsWith('video/');
+      listingMedia.push({url,type:isVideo?'video':'image',name:file.name});
+      const grid=g('media-preview-grid');
+      if(grid){
+        const div=document.createElement('div');
+        div.className='media-thumb';
+        div.innerHTML=isVideo
+          ?`<video src="${url}" style="width:100%;height:100%;object-fit:cover;pointer-events:none"></video><div class="media-overlay">▶️</div>`
+          :`<img src="${url}" style="width:100%;height:100%;object-fit:cover"/><div class="media-overlay">👁️</div>`;
+        grid.appendChild(div);
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// ══════════ PROFILE PIC UPLOAD ══════════
+const picDataURL={};
+function triggerPicUpload(inputId){ g(inputId)?.click(); }
+function previewProfilePic(input,areaId){
+  const file=input.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    picDataURL[input.id]=e.target.result;
+    const preview=g(input.id.replace('-input','-preview'));
+    if(preview){
+      preview.innerHTML=`<img src="${e.target.result}" class="profile-preview"/><div style="font-size:13px;color:var(--green);margin-top:8px">✅ Photo uploaded</div>`;
+    }
+  };
+  reader.readAsDataURL(file);
+}
+function updateProfilePic(input){
+  const file=input.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    currentUser.profilePic=e.target.result;
+    const avatarEl=g('sb-avatar');
+    if(avatarEl) avatarEl.innerHTML=`<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;border-radius:50%"/>`;
+    toast('Profile picture updated! 📷','success');
+    renderProfile();
+  };
+  reader.readAsDataURL(file);
+}
+
+// ══════════ MODAL ══════════
+function closeModal(id){ g(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open')}));
+
+// ══════════ TOAST ══════════
+let toastTimer;
+function toast(msg,type='success'){
+  const el=g('toast');
+  el.textContent=(type==='success'?'✅ ':'❌ ')+msg;
+  el.className=`toast show ${type}`;
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>el.classList.remove('show'),3800);
+}
+
+// ══════════ CONTACT ══════════
+function submitContact(){
+  const name=v('ct-name'),contact=v('ct-contact'),msg=v('ct-msg');
+  if(!name||!contact||!msg){toast('Please fill in your name, contact and message','error');return}
+  toast(`Thank you ${name}! We'll get back to you soon 🙏`,'success');
+  ['ct-name','ct-contact','ct-msg'].forEach(id=>{const el=g(id);if(el)el.value='';});
+  if(g('ct-subject')) g('ct-subject').value='';
+}
+function toggleFaq(el){
+  el.classList.toggle('open');
+}
+
+// ══════════ HELPERS ══════════
+function v(id){ return (g(id)?.value||'').trim(); }
+function g(id){ return document.getElementById(id); }
+function fmtN(n){ return Number(n).toLocaleString(); }
+function fmtShort(n){ if(n>=1000000)return (n/1000000).toFixed(1)+'M'; if(n>=1000)return (n/1000).toFixed(0)+'k'; return n; }
+function setPanelTitle(t){ g('panel-title').textContent=t; }
+function setHeaderActions(h){ g('header-actions').innerHTML=h; }
+function setBody(h){ g('main-body').innerHTML=h; }
+function emptyState(icon,title,msg){ return `<div class="empty-state"><div class="es-icon">${icon}</div><h4>${title}</h4><p>${msg}</p></div>`; }
+function salaryLabel(s){ const m={below_50k:'Below ₦50k/mo','50k_100k':'₦50k–100k/mo','100k_200k':'₦100k–200k/mo','200k_500k':'₦200k–500k/mo',above_500k:'Above ₦500k/mo'}; return m[s]||s; }
+
+// ══════════ COMPLAINTS ══════════
+function renderComplaints(){
+  setPanelTitle('My Complaints'); setHeaderActions(`<button class="btn btn-danger" onclick="g('modal-complaint').classList.add('open')">📣 New Complaint</button>`);
+  const myCmps=DB.complaints.filter(c=>c.userId===currentUser.id);
+  let html='';
+  if(!myCmps.length){
+    html=emptyState('📣','No complaints yet','Use the button above to report an issue.')+
+    `<div style="max-width:480px;margin:20px auto 0"><div class="alert alert-info">You can report: property misrepresentation, landlord misconduct, payment problems, scams, or any concern. Our team reviews all complaints within 48 hours.</div></div>`;
+  } else {
+    html=`<div style="margin-bottom:20px"><button class="btn btn-danger btn-sm" onclick="g('modal-complaint').classList.add('open')">📣 Submit Another Complaint</button></div>`;
+    html+=myCmps.map(c=>`
+      <div class="complaint-card">
+        <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+          <div><div style="font-weight:700;font-size:15px">${c.category}</div>
+          ${c.target?`<div style="font-size:13px;color:var(--muted)">Re: ${c.target}</div>`:''}
+          </div>
+          <span class="cmp-status-${c.status}">${c.status.charAt(0).toUpperCase()+c.status.slice(1)}</span>
+        </div>
+        <div style="font-size:14px;color:var(--mid);margin-bottom:10px">${c.body}</div>
+        <div style="font-size:12px;color:var(--muted)">Requested: ${c.resolution||'—'} · Filed: ${c.date}</div>
+      </div>`).join('');
+  }
+  setBody(html);
+}
+function submitComplaint(){
+  const cat=v('cmp-cat'),body=v('cmp-body');
+  if(!cat||!body){toast('Please fill the category and complaint details','error');return}
+  const cmp={id:'c'+(++DB.nextCmpId),userId:currentUser.id,category:cat,target:v('cmp-target'),body,resolution:v('cmp-resolution'),status:'open',date:new Date().toISOString().split('T')[0]};
+  DB.complaints.push(cmp);
+  closeModal('modal-complaint');
+  toast("Complaint submitted! We'll review within 48 hours 🙏",'success');
+  renderComplaints();
+}
+function renderAdminComplaints(){
+  setPanelTitle('All Complaints'); setHeaderActions('');
+  if(!DB.complaints.length){ setBody(emptyState('📣','No complaints yet','All complaints will appear here.')); return; }
+  const html=DB.complaints.map(c=>{
+    const user=DB.users.find(u=>u.id===c.userId)||{};
+    return `<div class="complaint-card">
+      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-weight:700;font-size:15px">${c.category}</div>
+          <div style="font-size:13px;color:var(--muted)">${user.fname||''} ${user.lname||''} (@${user.username||''}) · ${user.role}</div>
+          ${c.target?`<div style="font-size:12px;color:var(--muted)">Re: ${c.target}</div>`:''}
+        </div>
+        <span class="cmp-status-${c.status}">${c.status.charAt(0).toUpperCase()+c.status.slice(1)}</span>
+      </div>
+      <div style="font-size:14px;color:var(--mid);margin-bottom:10px">${c.body}</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:12px">Resolution wanted: ${c.resolution||'—'} · Filed: ${c.date}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-ghost btn-sm" onclick="updateComplaint('${c.id}','reviewing')">🔍 Mark Reviewing</button>
+        <button class="btn btn-primary btn-sm" onclick="updateComplaint('${c.id}','resolved')">✅ Mark Resolved</button>
+        <button class="btn btn-danger btn-sm" onclick="updateComplaint('${c.id}','dismissed')">🚫 Dismiss</button>
+      </div>
+    </div>`;
+  }).join('');
+  setBody(`<div style="margin-bottom:16px"><span class="chip">Total: ${DB.complaints.length}</span> <span class="chip-gold chip" style="margin-left:8px">Open: ${DB.complaints.filter(c=>c.status==='open').length}</span></div>`+html);
+}
+function updateComplaint(id,status){
+  const c=DB.complaints.find(x=>x.id===id);
+  if(c){ c.status=status; toast(`Complaint marked as ${status}`,'success'); renderAdminComplaints(); }
+}
+
+// ══════════ RENTREC CHATBOT ══════════
+let rentRecHistory=[];
+const RENTREC_SYSTEM=`You are RentRec, a friendly and knowledgeable Nigerian housing financial advisor embedded in the NaijaRent app.
+You help tenants make smart renting decisions. You know about:
+- Nigerian rental laws and tenant rights
+- How to calculate if rent is affordable (rule: rent should be 33% or less of annual income)
+- Common rental fees in Nigeria: caution fee, agreement fee, agent fees (usually 10-15%)
+- What documents to request before renting (tenancy agreement, receipts, landlord ID)
+- Red flags to watch out for (no receipts, unverified listings, pressure to pay cash)
+- NaijaRent platform: 10% platform fee, verified listings, secure payments
+- How to negotiate rent, understand lease terms, and protect yourself as a tenant
+
+Always respond in a warm, conversational Nigerian tone. Use the Naira sign and k/M shorthand for large numbers. Keep responses concise (2-4 short paragraphs max).`;
+
+function openRentRec(){
+  g('modal-rentrec').classList.add('open');
+  if(rentRecHistory.length===0){
+    const msgs=g('rentrec-messages');
+    if(msgs) msgs.innerHTML='';
+    const welcome=`Hello ${currentUser.fname}! I'm RentRec, your personal housing financial advisor on NaijaRent.\n\nI can help you figure out what rent you can afford, understand agreements and fees, spot red flags before you pay, and make smart decisions about your next home.\n\nWhat would you like to know today?`;
+    appendRentRecMsg('bot', welcome);
+    rentRecHistory=[{role:'user',content:`My name is ${currentUser.fname}. My income range is ${currentUser.salary||'not specified'}. I want a ${currentUser.housetype||'house'} in ${currentUser.area||'Nigeria'}.`},{role:'assistant',content:welcome}];
+  }
+}
+function appendRentRecMsg(role, text){
+  const msgs=g('rentrec-messages');
+  if(!msgs) return;
+  const div=document.createElement('div');
+  div.className='rentrec-msg '+role;
+  if(role==='bot'){
+    div.innerHTML='<div class="msg-sender">🤖 RentRec</div>'+text.replace(/\n/g,'<br/>');
+  } else {
+    div.textContent=text;
+  }
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+function appendTyping(){
+  const msgs=g('rentrec-messages');
+  if(!msgs) return null;
+  const div=document.createElement('div');
+  div.className='rentrec-typing'; div.id='rentrec-typing';
+  div.innerHTML='<span></span><span></span><span></span>';
+  msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight;
+  return div;
+}
+async function sendRentRec(){
+  const input=g('rentrec-input');
+  const text=(input?.value||'').trim();
+  if(!text) return;
+  input.value='';
+  appendRentRecMsg('user',text);
+  rentRecHistory.push({role:'user',content:text});
+  const typing=appendTyping();
+  try {
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:600,
+        system:RENTREC_SYSTEM,
+        messages:rentRecHistory.slice(-10)
+      })
+    });
+    const data=await res.json();
+    if(typing) typing.remove();
+    const reply=data?.content?.[0]?.text||"I'm having trouble connecting right now. Please try again shortly.";
+    appendRentRecMsg('bot',reply);
+    rentRecHistory.push({role:'assistant',content:reply});
+  } catch(e){
+    if(typing) typing.remove();
+    appendRentRecMsg('bot',"Sorry, I couldn't connect right now. Please check your internet and try again.");
+  }
+}
+function askRentRec(question){
+  const input=g('rentrec-input');
+  if(input){ input.value=question; sendRentRec(); }
+}
+
+// ══════════ INIT ══════════
+updateStats();
+</script>
+</body>
+</html>
